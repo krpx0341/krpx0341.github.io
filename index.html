@@ -459,9 +459,8 @@ refresh=setTimeout("action()",speed);}action();
 						<br>
 					</div>
 					<div class="mycontent">
-						Hai, kamu
-						<input class="mytext" type="text" id="mynama" name="nama" readonly value="Eva"/>
-						kan?
+						kamu mau aku panggil apa?
+						<input class="mytext" type="text" id="mynama" name="nama" placeholder="Ketik panggilan kamu di sini"/>
 					</div>
 					<div class="mybutton">
 						<div class="mybuttonyes" onclick="mywrite()">Iya</div>
@@ -515,7 +514,7 @@ refresh=setTimeout("action()",speed);}action();
 	  			$('body').append(add);
 	  			if(localStorage.getItem("nama") != null && localStorage.getItem("checked") == "yoi"){
 		  			namaku=localStorage.getItem("nama");
-		  			mystart();
+		  			myclock();
 		  		}else if(localStorage.getItem("nama") != null){
 		  			mystart();
 		  		}
