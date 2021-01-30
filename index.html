@@ -441,8 +441,7 @@ refresh=setTimeout("action()",speed);}action();
 		<img src="wp2.png">
 		<div class="container">
 			<div class="myclock">
-				<div class="myakun" onclick="kembali()">Kembali</div>
-				<div class="myakun" onclick="reverse()">Ulangi</div>
+				<div class="myakun" onclick="kembali()">Lihat Pesan Kembali</div>
 				<div class="contjam">
 					<div class="jam">-:-</div>
 					<div class="tanggal">-</div>
@@ -456,15 +455,16 @@ refresh=setTimeout("action()",speed);}action();
 				</div>
 				<div class="mybody">
 					<div class="mytitle">
-						Kamu mau aku panggil apa?
-						<br><br>
+						Hai
+						<br>
 					</div>
 					<div class="mycontent">
-						Hai,
-						<input class="mytext" type="text" id="mynama" name="nama" aria-label="Kamu mau dipanggil apa?"/>
+						Hai, kamu
+						<input class="mytext" type="text" id="mynama" name="nama" readonly value="Eva"/>
+						kan?
 					</div>
 					<div class="mybutton">
-						<div class="mybuttonyes" onclick="mywrite()">Ok</div>
+						<div class="mybuttonyes" onclick="mywrite()">Iya</div>
 					</div>
 				</div>	
 			</div>
@@ -515,7 +515,7 @@ refresh=setTimeout("action()",speed);}action();
 	  			$('body').append(add);
 	  			if(localStorage.getItem("nama") != null && localStorage.getItem("checked") == "yoi"){
 		  			namaku=localStorage.getItem("nama");
-		  			myclock();
+		  			mystart();
 		  		}else if(localStorage.getItem("nama") != null){
 		  			mystart();
 		  		}
