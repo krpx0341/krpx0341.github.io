@@ -29,3 +29,12 @@ h3 {
     font-family: 'Courier New', Courier, monospace;
     color: white;
 }
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: cyan;
+}
