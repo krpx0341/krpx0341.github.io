@@ -127,27 +127,6 @@
       text-shadow: 0 2px 8px #000, 0 0 14px rgba(255, 96, 20, 0.18);
       pointer-events: none;
     }
-    #ember-status {
-      position: absolute;
-      left: 50%;
-      top: calc(50% + clamp(90px, 12vw, 144px));
-      transform: translateX(-50%);
-      z-index: 10001;
-      color: rgba(196, 113, 69, 0.56);
-      font-size: 8px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      pointer-events: none;
-      animation: emberStatus 3.8s ease-in-out infinite;
-    }
-    @keyframes emberStatus {
-      0%, 100% { opacity: 0.24; }
-      55% { opacity: 0.72; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      #ember-status { animation: none; }
-    }
-
     #splash-instruction {
       position: absolute;
       bottom: 36px;
@@ -909,7 +888,6 @@
   <!-- SPLASH SCREEN CANVAS & INSTRUCTION -->
   <div id="splash-screen">
     <div id="splash-epigraph">some things keep burning<br>long after the flame is gone.</div>
-    <div id="ember-status">ember process // nearly gone</div>
     <div id="splash-instruction">[DRAG TO LOOK AROUND // ENTER TO CONTINUE]</div>
   </div>
   <canvas id="snowCanvas"></canvas>
