@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>the algorithm mirror // menjelangpadam</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png"><text y='.9em' font-size='80'>🐈</text></svg>">
+  <style>
+    @font-face {
+      font-family: 'Mono';
+      src: url('fonts/jetbrains-mono-400.woff2') format('woff2');
+      font-display: swap;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0b0c10;
+      color: #e2e4ea;
+      font-family: 'Mono', monospace, ui-monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 16px 24px;
+      background: rgba(11, 12, 16, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid #282c37;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .brand h1 {
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #eceff4;
+      font-weight: 700;
+    }
+    .brand p {
+      color: #9aa0b2;
+      font-size: 11px;
+    }
+    .back-btn {
+      color: #88c0d0;
+      text-decoration: none;
+      font-size: 12px;
+      padding: 5px 12px;
+      border: 1px solid #282c37;
+      background: #151821;
+      border-radius: 2px;
+      transition: all 0.15s ease;
+    }
+    .back-btn:hover {
+      color: #fff;
+      border-color: #88c0d0;
+      background: #1e2330;
+      text-decoration: none;
+    }
+    main {
+      columns: 2 180px;
+      column-gap: 12px;
+      padding: 16px 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .pin {
+      break-inside: avoid;
+      margin: 0 0 12px;
+      position: relative;
+      background: #151821;
+      border: 1px solid #282c37;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .pin:hover {
+      transform: translateY(-2px);
+      border-color: #3d4455;
+    }
+    .pin img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: contrast(1.02);
+    }
+    figcaption {
+      position: absolute;
+      right: 6px;
+      bottom: 6px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #eceff4;
+      padding: 2px 6px;
+      font-size: 9.5px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      letter-spacing: 0.5px;
+      pointer-events: none;
+    }
+    @media (min-width: 700px) {
+      main { columns: 3 220px; }
+    }
+    @media (min-width: 1000px) {
+      main { columns: 4 230px; }
+    }
+    @media (min-width: 1300px) {
+      main { columns: 5 240px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>THE ALGORITHM MIRROR // 100 RAW PINS</h1>
+      <p>Uncurated captures from my live Pinterest feed. Stray animals, dark frames, vintage audio, and quiet corners.</p>
+    </div>
+    <a href="index.html" class="back-btn">&larr; back to home</a>
+  </header>
+  <main>
+    <figure class="pin">
+      <img src="images/feed/feed_001.jpg" loading="lazy" alt="Algorithm pin #001" width="474">
+      <figcaption>#001</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_002.jpg" loading="lazy" alt="Algorithm pin #002" width="474">
+      <figcaption>#002</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_003.jpg" loading="lazy" alt="Algorithm pin #003" width="474">
+      <figcaption>#003</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_004.jpg" loading="lazy" alt="Algorithm pin #004" width="474">
+      <figcaption>#004</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_005.jpg" loading="lazy" alt="Algorithm pin #005" width="474">
+      <figcaption>#005</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_006.jpg" loading="lazy" alt="Algorithm pin #006" width="474">
+      <figcaption>#006</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_007.jpg" loading="lazy" alt="Algorithm pin #007" width="474">
+      <figcaption>#007</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_008.jpg" loading="lazy" alt="Algorithm pin #008" width="474">
+      <figcaption>#008</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_009.jpg" loading="lazy" alt="Algorithm pin #009" width="474">
+      <figcaption>#009</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_010.jpg" loading="lazy" alt="Algorithm pin #010" width="474">
+      <figcaption>#010</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_011.jpg" loading="lazy" alt="Algorithm pin #011" width="474">
+      <figcaption>#011</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_012.jpg" loading="lazy" alt="Algorithm pin #012" width="474">
+      <figcaption>#012</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_013.jpg" loading="lazy" alt="Algorithm pin #013" width="474">
+      <figcaption>#013</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_014.jpg" loading="lazy" alt="Algorithm pin #014" width="474">
+      <figcaption>#014</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_015.jpg" loading="lazy" alt="Algorithm pin #015" width="474">
+      <figcaption>#015</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_016.jpg" loading="lazy" alt="Algorithm pin #016" width="474">
+      <figcaption>#016</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_017.jpg" loading="lazy" alt="Algorithm pin #017" width="474">
+      <figcaption>#017</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_018.jpg" loading="lazy" alt="Algorithm pin #018" width="474">
+      <figcaption>#018</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_019.jpg" loading="lazy" alt="Algorithm pin #019" width="474">
+      <figcaption>#019</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_020.jpg" loading="lazy" alt="Algorithm pin #020" width="474">
+      <figcaption>#020</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_021.jpg" loading="lazy" alt="Algorithm pin #021" width="474">
+      <figcaption>#021</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_022.jpg" loading="lazy" alt="Algorithm pin #022" width="474">
+      <figcaption>#022</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_023.jpg" loading="lazy" alt="Algorithm pin #023" width="474">
+      <figcaption>#023</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_024.jpg" loading="lazy" alt="Algorithm pin #024" width="474">
+      <figcaption>#024</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_025.jpg" loading="lazy" alt="Algorithm pin #025" width="474">
+      <figcaption>#025</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_026.jpg" loading="lazy" alt="Algorithm pin #026" width="474">
+      <figcaption>#026</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_027.jpg" loading="lazy" alt="Algorithm pin #027" width="474">
+      <figcaption>#027</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_028.jpg" loading="lazy" alt="Algorithm pin #028" width="474">
+      <figcaption>#028</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_029.jpg" loading="lazy" alt="Algorithm pin #029" width="474">
+      <figcaption>#029</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_030.jpg" loading="lazy" alt="Algorithm pin #030" width="474">
+      <figcaption>#030</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_031.jpg" loading="lazy" alt="Algorithm pin #031" width="474">
+      <figcaption>#031</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_032.jpg" loading="lazy" alt="Algorithm pin #032" width="474">
+      <figcaption>#032</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_033.jpg" loading="lazy" alt="Algorithm pin #033" width="474">
+      <figcaption>#033</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_034.jpg" loading="lazy" alt="Algorithm pin #034" width="474">
+      <figcaption>#034</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_035.jpg" loading="lazy" alt="Algorithm pin #035" width="474">
+      <figcaption>#035</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_036.jpg" loading="lazy" alt="Algorithm pin #036" width="474">
+      <figcaption>#036</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_037.jpg" loading="lazy" alt="Algorithm pin #037" width="474">
+      <figcaption>#037</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_038.jpg" loading="lazy" alt="Algorithm pin #038" width="474">
+      <figcaption>#038</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_039.jpg" loading="lazy" alt="Algorithm pin #039" width="474">
+      <figcaption>#039</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_040.jpg" loading="lazy" alt="Algorithm pin #040" width="474">
+      <figcaption>#040</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_041.jpg" loading="lazy" alt="Algorithm pin #041" width="474">
+      <figcaption>#041</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_042.jpg" loading="lazy" alt="Algorithm pin #042" width="474">
+      <figcaption>#042</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_043.jpg" loading="lazy" alt="Algorithm pin #043" width="474">
+      <figcaption>#043</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_044.jpg" loading="lazy" alt="Algorithm pin #044" width="474">
+      <figcaption>#044</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_045.jpg" loading="lazy" alt="Algorithm pin #045" width="474">
+      <figcaption>#045</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_046.jpg" loading="lazy" alt="Algorithm pin #046" width="474">
+      <figcaption>#046</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_047.jpg" loading="lazy" alt="Algorithm pin #047" width="474">
+      <figcaption>#047</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_048.jpg" loading="lazy" alt="Algorithm pin #048" width="474">
+      <figcaption>#048</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_049.jpg" loading="lazy" alt="Algorithm pin #049" width="474">
+      <figcaption>#049</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_050.jpg" loading="lazy" alt="Algorithm pin #050" width="474">
+      <figcaption>#050</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_051.jpg" loading="lazy" alt="Algorithm pin #051" width="474">
+      <figcaption>#051</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_052.jpg" loading="lazy" alt="Algorithm pin #052" width="474">
+      <figcaption>#052</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_053.jpg" loading="lazy" alt="Algorithm pin #053" width="474">
+      <figcaption>#053</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_054.jpg" loading="lazy" alt="Algorithm pin #054" width="474">
+      <figcaption>#054</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_055.jpg" loading="lazy" alt="Algorithm pin #055" width="474">
+      <figcaption>#055</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_056.jpg" loading="lazy" alt="Algorithm pin #056" width="474">
+      <figcaption>#056</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_057.jpg" loading="lazy" alt="Algorithm pin #057" width="474">
+      <figcaption>#057</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_058.jpg" loading="lazy" alt="Algorithm pin #058" width="474">
+      <figcaption>#058</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_059.jpg" loading="lazy" alt="Algorithm pin #059" width="474">
+      <figcaption>#059</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_060.jpg" loading="lazy" alt="Algorithm pin #060" width="474">
+      <figcaption>#060</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_061.jpg" loading="lazy" alt="Algorithm pin #061" width="474">
+      <figcaption>#061</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_062.jpg" loading="lazy" alt="Algorithm pin #062" width="474">
+      <figcaption>#062</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_063.jpg" loading="lazy" alt="Algorithm pin #063" width="474">
+      <figcaption>#063</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_064.jpg" loading="lazy" alt="Algorithm pin #064" width="474">
+      <figcaption>#064</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_065.jpg" loading="lazy" alt="Algorithm pin #065" width="474">
+      <figcaption>#065</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_066.jpg" loading="lazy" alt="Algorithm pin #066" width="474">
+      <figcaption>#066</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_067.jpg" loading="lazy" alt="Algorithm pin #067" width="474">
+      <figcaption>#067</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_068.jpg" loading="lazy" alt="Algorithm pin #068" width="474">
+      <figcaption>#068</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_069.jpg" loading="lazy" alt="Algorithm pin #069" width="474">
+      <figcaption>#069</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_070.jpg" loading="lazy" alt="Algorithm pin #070" width="474">
+      <figcaption>#070</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_071.jpg" loading="lazy" alt="Algorithm pin #071" width="474">
+      <figcaption>#071</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_072.jpg" loading="lazy" alt="Algorithm pin #072" width="474">
+      <figcaption>#072</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_073.jpg" loading="lazy" alt="Algorithm pin #073" width="474">
+      <figcaption>#073</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_074.jpg" loading="lazy" alt="Algorithm pin #074" width="474">
+      <figcaption>#074</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_075.jpg" loading="lazy" alt="Algorithm pin #075" width="474">
+      <figcaption>#075</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_076.jpg" loading="lazy" alt="Algorithm pin #076" width="474">
+      <figcaption>#076</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_077.jpg" loading="lazy" alt="Algorithm pin #077" width="474">
+      <figcaption>#077</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_078.jpg" loading="lazy" alt="Algorithm pin #078" width="474">
+      <figcaption>#078</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_079.jpg" loading="lazy" alt="Algorithm pin #079" width="474">
+      <figcaption>#079</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_080.jpg" loading="lazy" alt="Algorithm pin #080" width="474">
+      <figcaption>#080</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_081.jpg" loading="lazy" alt="Algorithm pin #081" width="474">
+      <figcaption>#081</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_082.jpg" loading="lazy" alt="Algorithm pin #082" width="474">
+      <figcaption>#082</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_083.jpg" loading="lazy" alt="Algorithm pin #083" width="474">
+      <figcaption>#083</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_084.jpg" loading="lazy" alt="Algorithm pin #084" width="474">
+      <figcaption>#084</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_085.jpg" loading="lazy" alt="Algorithm pin #085" width="474">
+      <figcaption>#085</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_086.jpg" loading="lazy" alt="Algorithm pin #086" width="474">
+      <figcaption>#086</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_087.jpg" loading="lazy" alt="Algorithm pin #087" width="474">
+      <figcaption>#087</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_088.jpg" loading="lazy" alt="Algorithm pin #088" width="474">
+      <figcaption>#088</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_089.jpg" loading="lazy" alt="Algorithm pin #089" width="474">
+      <figcaption>#089</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_090.jpg" loading="lazy" alt="Algorithm pin #090" width="474">
+      <figcaption>#090</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_091.jpg" loading="lazy" alt="Algorithm pin #091" width="474">
+      <figcaption>#091</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_092.jpg" loading="lazy" alt="Algorithm pin #092" width="474">
+      <figcaption>#092</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_093.jpg" loading="lazy" alt="Algorithm pin #093" width="474">
+      <figcaption>#093</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_094.jpg" loading="lazy" alt="Algorithm pin #094" width="474">
+      <figcaption>#094</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_095.jpg" loading="lazy" alt="Algorithm pin #095" width="474">
+      <figcaption>#095</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_096.jpg" loading="lazy" alt="Algorithm pin #096" width="474">
+      <figcaption>#096</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_097.jpg" loading="lazy" alt="Algorithm pin #097" width="474">
+      <figcaption>#097</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_098.jpg" loading="lazy" alt="Algorithm pin #098" width="474">
+      <figcaption>#098</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_099.jpg" loading="lazy" alt="Algorithm pin #099" width="474">
+      <figcaption>#099</figcaption>
+    </figure>
+<figure class="pin">
+      <img src="images/feed/feed_100.jpg" loading="lazy" alt="Algorithm pin #100" width="474">
+      <figcaption>#100</figcaption>
+    </figure>
+  </main>
+</body>
+</html>

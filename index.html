@@ -1,1 +1,1338 @@
-<!DOCTYPE html><html lang="en" class="scroll-smooth"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Usable Systems | Dev Sketchbook</title><script src="https://cdn.tailwindcss.com"></script><script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script><style>@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Gaegu:wght@400;700&family=Kalam:wght@300;400;700&display=swap');:root { --teal: #00D9FF; --magenta: #FF006E; --orange: #FF9E1B; --lime: #B8FF00; --cream: #FFF8E7; } body { font-family: 'Gaegu', cursive; color: #1a1a1a; background-color: var(--cream); margin: 0; padding: 0; overflow-x: hidden; } .bold-display { font-family: 'Archivo Black', sans-serif; } .quirky-font { font-family: 'Kalam', cursive; } .sketch-border { border: 4px solid #1a1a1a; border-radius: 255px 15px 225px 15px/15px 225px 15px 255px; } .sketch-border-sm { border: 3px solid #1a1a1a; border-radius: 2% 98% 3% 97%/95% 4% 96% 5%; } .speech-bubble { position: relative; background: #ffffff; border: 3px solid #1a1a1a; padding: 15px; border-radius: 20px; } .speech-bubble::after { content: ''; position: absolute; bottom: -20px; left: 30px; border-width: 20px 20px 0 0; border-style: solid; border-color: #1a1a1a transparent; } .speech-bubble::before { content: ''; position: absolute; bottom: -12px; left: 32px; border-width: 15px 15px 0 0; border-style: solid; border-color: #ffffff transparent; z-index: 1; } .floating { animation: float 5s ease-in-out infinite alternate; } @keyframes float { 0% { transform: translate(0, 0) rotate(0deg); } 100% { transform: translate(10px, -15px) rotate(3deg); } } .marker-highlight { position: relative; z-index: 1; } .marker-highlight::after { content: ''; position: absolute; left: -5%; bottom: 5%; width: 110%; height: 40%; background: var(--lime); z-index: -1; transform: rotate(-2deg); opacity: 0.6; } .scribble-underline { border-bottom: 4px solid #1a1a1a; border-radius: 100% 0% 100% 0%/100% 0% 100% 0%; }</style></head><body><div class="min-h-screen relative selection:bg-[var(--magenta)] selection:text-white"><div class="fixed inset-0 pointer-events-none z-0 opacity-10" style="background-image: radial-gradient(#1a1a1a 1px, transparent 1px); background-size: 30px 30px;"></div><div class="absolute top-20 left-10 text-[var(--orange)] opacity-40 floating z-0"><iconify-icon icon="fluent:sparkles-24-filled" class="text-8xl"></iconify-icon></div><div class="absolute top-1/2 right-5 text-[var(--teal)] opacity-30 floating z-0" style="animation-delay: -2s"><iconify-icon icon="ph:scribble-bold" class="text-[180px]"></iconify-icon></div><header class="relative w-full z-50 px-6 py-8"><nav class="max-w-7xl mx-auto flex items-center justify-between"><div class="text-3xl bold-display tracking-tighter text-white bg-[#1a1a1a] p-3 -rotate-3 sketch-border-sm" id="nav-logo-box">USABLE_DEV</div><div class="hidden md:flex items-center gap-10 text-lg font-bold uppercase"><a href="#philosophy" id="nav-phil-link" class="hover:text-[var(--magenta)] transition-all group">Philosophy<span class="block h-1 bg-[var(--magenta)] w-0 group-hover:w-full transition-all"></span></a><a href="#projects" id="nav-projects-link" class="hover:text-[var(--orange)] transition-all group">Projects<span class="block h-1 bg-[var(--orange)] w-0 group-hover:w-full transition-all"></span></a><a href="#gear" id="nav-gear-link" class="hover:text-[var(--teal)] transition-all group">Gear<span class="block h-1 bg-[var(--teal)] w-0 group-hover:w-full transition-all"></span></a><a href="#contact" id="nav-contact-link" class="bg-[var(--orange)] text-[#1a1a1a] px-8 py-3 sketch-border-sm hover:translate-x-1 hover:-translate-y-1 transition-all">LET'S TALK!</a></div></nav></header><main class="relative z-10"><section class="min-h-screen flex items-center px-6 md:px-12 pt-10"><div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center"><div class="lg:col-span-7"><div class="inline-block px-4 py-1 mb-6 text-sm font-bold uppercase tracking-tighter bg-[var(--magenta)] text-white rotate-2">Version 2.0: Human-Centric</div><h1 class="text-7xl md:text-[120px] bold-display leading-[0.85] mb-8 uppercase tracking-tighter"><span class="text-[#1a1a1a]">Systems</span><br><span class="text-[var(--teal)] marker-highlight">to be</span><br><span class="text-[var(--magenta)]">Used.</span></h1><div class="max-w-xl relative p-8 bg-white text-[#1a1a1a] sketch-border-sm rotate-[-1deg] mb-12 shadow-xl"><p class="text-2xl md:text-3xl font-bold leading-tight">Code is just a draft. The real masterpiece is a system that someone actually enjoys using every day.</p><div class="absolute -top-12 -right-8 w-24 h-24 text-[var(--orange)] floating"><iconify-icon icon="line-md:lightbulb-twotone" class="text-8xl"></iconify-icon></div></div><div class="flex gap-8 items-center flex-wrap"><a href="#gear" id="cta-gear" class="bg-[var(--lime)] text-[#1a1a1a] px-12 py-6 bold-display text-2xl sketch-border-sm hover:rotate-3 transition-transform shadow-lg">MY STACK</a><div class="quirky-font text-xl opacity-60 rotate-6"><iconify-icon icon="bi:arrow-left" class="mr-2"></iconify-icon>click this for the tools!</div></div></div><div class="lg:col-span-5 relative"><div class="relative z-10 w-full aspect-[4/5] sketch-border rotate-3 bg-white overflow-hidden shadow-2xl"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&q=80&w=1000" alt="Artistic Placeholder" class="w-full h-full object-cover opacity-50 mix-blend-multiply"><div class="absolute inset-0 flex items-center justify-center"><div class="text-center space-y-4"><iconify-icon icon="fluent:person-board-24-filled" class="text-[200px] text-[var(--magenta)]"></iconify-icon><div class="speech-bubble bold-display text-lg rotate-[-5deg]">I'M THINKING!</div></div></div></div><div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[var(--lime)] sketch-border-sm -z-10 rotate-[-15deg] flex items-center justify-center"><iconify-icon icon="mdi:brain" class="text-6xl text-white"></iconify-icon></div><div class="absolute top-0 -right-5 text-4xl quirky-font text-[var(--magenta)]">* scribbles *</div></div></div></section><section id="philosophy" class="py-32 px-6 overflow-hidden"><div class="max-w-7xl mx-auto"><div class="grid grid-cols-1 lg:grid-cols-2 gap-20"><div class="relative"><div class="absolute -top-10 -left-10 text-[var(--teal)] opacity-50"><iconify-icon icon="ph:hand-waving-bold" class="text-9xl"></iconify-icon></div><h2 class="text-6xl md:text-8xl bold-display leading-none mb-12 uppercase tracking-tighter">The <br><span class="text-[var(--orange)]">DIY</span> <br>Soul.</h2><p class="text-3xl font-bold leading-tight mb-8">I believe in the messy intersection of craft and technology. It doesn't have to be perfect; it has to be <span class="scribble-underline">impactful</span>.</p><div class="space-y-6 text-xl opacity-80"><p>Efficiency is just a number. Joy is an experience. My philosophy is to hide the complexity under a layer of pure intuitiveness.</p></div></div><div class="space-y-8 mt-12 lg:mt-0"><div class="p-8 bg-[var(--teal)]/10 sketch-border-sm rotate-2 hover:rotate-0 transition-transform"><h3 class="text-3xl bold-display uppercase mb-4">01. RADICAL USE</h3><p class="text-xl">If a feature doesn't solve a human pain point within 3 seconds, it's garbage. Burn it down.</p></div><div class="p-8 bg-[var(--magenta)]/10 sketch-border-sm -rotate-2 hover:rotate-0 transition-transform"><h3 class="text-3xl bold-display uppercase mb-4">02. ORGANIC CODE</h3><p class="text-xl">Codebases that grow like gardens. Maintainable, breathable, and full of life.</p></div></div></div></div></section><section id="projects" class="py-32 px-6 relative overflow-hidden"><div class="max-w-7xl mx-auto"><div class="mb-20 -rotate-2 inline-block"><h2 class="text-7xl md:text-9xl bold-display uppercase tracking-tighter marker-highlight">The Labs</h2><p class="quirky-font text-3xl text-[var(--magenta)] mt-2">* Actual source code from the void *</p></div><div class="space-y-32"><div class="group-krpx"> <div class="flex items-center gap-4 mb-10 rotate-1"><span class="bg-[#1a1a1a] text-white px-6 py-2 bold-display text-2xl sketch-border-sm">KRPX0341</span><div class="h-1 flex-1 bg-[#1a1a1a] opacity-20"></div></div> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"> <a href="https://github.com/krpx0341/autopost" target="_blank" rel="noopener" id="project-krpx-autopost" class="p-6 bg-white sketch-border-sm rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase">autopost</h3> <p class="text-lg mb-4 opacity-80">Automatic create and post for an wordpress blog.</p> <span class="text-xs font-bold px-2 py-1 bg-gray-100 uppercase">Source</span> </a> <a href="https://github.com/krpx0341/cek-laptop" target="_blank" rel="noopener" id="project-krpx-cek" class="p-6 bg-white sketch-border-sm -rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase text-[var(--teal)]">cek-laptop</h3> <p class="text-lg mb-4 opacity-80">Uji laptop bekas langsung di tempat, dari browser — gratis, open source.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--teal)]/20 uppercase">HTML</span> </a> <a href="https://github.com/krpx0341/image-to-logo" target="_blank" rel="noopener" id="project-krpx-logo" class="p-6 bg-white sketch-border-sm rotate-2 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase">image-to-logo</h3> <p class="text-lg mb-4 opacity-80">Client-side image-to-logo cropper (1:1, jpg/jpeg/png, max 10MB).</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--orange)]/20 uppercase">JavaScript</span> </a> <a href="https://github.com/krpx0341/WisataMagelang-Content-Engine-Pro" target="_blank" rel="noopener" id="project-krpx-wisata" class="p-6 bg-white sketch-border-sm -rotate-2 hover:rotate-0 transition-transform shadow-lg block lg:col-span-2"> <h3 class="text-2xl bold-display mb-2 uppercase text-[var(--magenta)]">WisataMagelang Pro</h3> <p class="text-lg mb-4 opacity-80">Streamlit-based automated auto-blogging: fetches trending news, rewrites into SEO posts with GPT-4o.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--magenta)]/20 uppercase">Python</span> </a> <a href="https://github.com/krpx0341/Tutingtas" target="_blank" rel="noopener" id="project-krpx-tutingtas" class="p-6 bg-white sketch-border-sm rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase">Tutingtas</h3> <p class="text-lg mb-4 opacity-80">BatuGuntingKertas</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--lime)]/20 uppercase text-black">HTML</span> </a> <a href="https://github.com/krpx0341/blog" target="_blank" rel="noopener" id="project-krpx-blog" class="p-6 bg-white sketch-border-sm rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase">blog</h3> <p class="text-lg mb-4 opacity-80">backup</p> <span class="text-xs font-bold px-2 py-1 bg-gray-100 uppercase">Misc</span> </a> <a href="https://github.com/krpx0341/hello-world" target="_blank" rel="noopener" id="project-krpx-hello" class="p-6 bg-white sketch-border-sm -rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase text-[var(--teal)]">hello-world</h3> <p class="text-lg mb-4 opacity-80">Ini adalah proyek latihan memakai github pertama saya.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--teal)]/20 uppercase">HTML</span> </a> <a href="https://github.com/krpx0341/krpx0341" target="_blank" rel="noopener" id="project-krpx-profile" class="p-6 bg-white sketch-border-sm rotate-2 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase">krpx0341</h3> <p class="text-lg mb-4 opacity-80">Profile README.</p> <span class="text-xs font-bold px-2 py-1 bg-gray-100 uppercase">Misc</span> </a> <a href="https://github.com/krpx0341/krpx0341.github.io" target="_blank" rel="noopener" id="project-krpx-thissite" class="p-6 bg-white sketch-border-sm -rotate-2 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase text-[var(--magenta)]">krpx0341.github.io</h3> <p class="text-lg mb-4 opacity-80">Web Hanif — this very site.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--magenta)]/20 uppercase">HTML</span> </a> <a href="https://github.com/krpx0341/lazdkd-donation-hub" target="_blank" rel="noopener" id="project-krpx-lazdkd" class="p-6 bg-white sketch-border-sm rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase">lazdkd-donation-hub</h3> <p class="text-lg mb-4 opacity-80">Donation hub project.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--orange)]/20 uppercase">TypeScript</span> </a> <a href="https://github.com/krpx0341/menkeu" target="_blank" rel="noopener" id="project-krpx-menkeu" class="p-6 bg-white sketch-border-sm -rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase text-[var(--lime)] text-black">menkeu</h3> <p class="text-lg mb-4 opacity-80">Active work in progress.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--lime)]/20 uppercase text-black">TypeScript</span> </a> <a href="https://github.com/krpx0341/Test" target="_blank" rel="noopener" id="project-krpx-test" class="p-6 bg-white sketch-border-sm rotate-2 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase">Test</h3> <p class="text-lg mb-4 opacity-80">Sandbox / scratch repo.</p> <span class="text-xs font-bold px-2 py-1 bg-gray-100 uppercase">Misc</span> </a> </div> </div><div class="group-dalam"> <div class="flex items-center gap-4 mb-10 -rotate-1"><div class="h-1 flex-1 bg-[#1a1a1a] opacity-20"></div><span class="bg-[var(--magenta)] text-white px-6 py-2 bold-display text-2xl sketch-border-sm">DALAMJARINGAN</span></div> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"> <a href="https://github.com/dalamjaringan/ArGen" target="_blank" rel="noopener" id="project-dj-argen" class="p-6 bg-white sketch-border-sm rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase text-[var(--teal)]">ArGen</h3> <p class="text-lg mb-4 opacity-80">Artikel Generator using OpenAI API.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--teal)]/20 uppercase">Python</span> </a> <a href="https://github.com/dalamjaringan/auto-presensi-elita" target="_blank" rel="noopener" id="project-dj-elita" class="p-6 bg-white sketch-border-sm -rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase">auto-presensi</h3> <p class="text-lg mb-4 opacity-80">Automated attendance recording tool for Elita built using Selenium.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--magenta)]/20 uppercase">Python</span> </a> <a href="https://github.com/dalamjaringan/QR-Generator" target="_blank" rel="noopener" id="project-dj-qr" class="p-6 bg-white sketch-border-sm rotate-2 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase text-[var(--orange)]">QR-Generator</h3> <p class="text-lg mb-4 opacity-80">Web Based QR Code Generator.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--orange)]/20 uppercase">TypeScript</span> </a> <a href="https://github.com/dalamjaringan/tiktokshop-order-copier" target="_blank" rel="noopener" id="project-dj-tiktok" class="p-6 bg-white sketch-border-sm -rotate-2 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase">TikTok Copier</h3> <p class="text-lg mb-4 opacity-80">Browser extension to copy customer data from TikTok Shop detail pages.</p> <span class="text-xs font-bold px-2 py-1 bg-yellow-100 uppercase">JavaScript</span> </a> <a href="https://github.com/dalamjaringan/wa.me-generator" target="_blank" rel="noopener" id="project-dj-wa" class="p-6 bg-white sketch-border-sm rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase">wa.me Gen</h3> <p class="text-lg mb-4 opacity-80">Simple and learnable WhatsApp link generator.</p> <span class="text-xs font-bold px-2 py-1 bg-blue-100 uppercase">TypeScript</span> </a> <a href="https://github.com/dalamjaringan/Jarvis" target="_blank" rel="noopener" id="project-dj-jarvis" class="p-6 bg-white sketch-border-sm -rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase text-[var(--lime)] text-black">Jarvis</h3> <p class="text-lg mb-4 opacity-80">Personal Assistant Using OpenAI API.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--lime)]/20 uppercase text-black">Python</span> </a> <a href="https://github.com/dalamjaringan/BatuGuntingKertas" target="_blank" rel="noopener" id="project-dj-bgk" class="p-6 bg-white sketch-border-sm rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase">BatuGuntingKertas</h3> <p class="text-lg mb-4 opacity-80">Rock-paper-scissors mini game.</p> <span class="text-xs font-bold px-2 py-1 bg-gray-100 uppercase">HTML</span> </a> <a href="https://github.com/dalamjaringan/blog" target="_blank" rel="noopener" id="project-dj-blog" class="p-6 bg-white sketch-border-sm -rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase text-[var(--teal)]">blog</h3> <p class="text-lg mb-4 opacity-80">backup</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--teal)]/20 uppercase">Misc</span> </a> <a href="https://github.com/dalamjaringan/dalamjaringan.github.io" target="_blank" rel="noopener" id="project-dj-thissite" class="p-6 bg-white sketch-border-sm rotate-2 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase text-[var(--orange)]">dalamjaringan.github.io</h3> <p class="text-lg mb-4 opacity-80">Personal Logbook.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--orange)]/20 uppercase">HTML</span> </a> <a href="https://github.com/dalamjaringan/Instadownloader" target="_blank" rel="noopener" id="project-dj-insta" class="p-6 bg-white sketch-border-sm -rotate-2 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase text-[var(--magenta)]">Instadownloader</h3> <p class="text-lg mb-4 opacity-80">Alat download postingan IG.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--magenta)]/20 uppercase">Python</span> </a> <a href="https://github.com/dalamjaringan/Penghapus-Dosa" target="_blank" rel="noopener" id="project-dj-penghapus" class="p-6 bg-white sketch-border-sm rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase">Penghapus-Dosa</h3> <p class="text-lg mb-4 opacity-80">Experimental repo.</p> <span class="text-xs font-bold px-2 py-1 bg-gray-100 uppercase">Misc</span> </a> <a href="https://github.com/dalamjaringan/privacy-policy" target="_blank" rel="noopener" id="project-dj-privacy" class="p-6 bg-white sketch-border-sm -rotate-1 hover:rotate-0 transition-transform shadow-lg block"> <h3 class="text-2xl bold-display mb-2 uppercase text-[var(--lime)] text-black">privacy-policy</h3> <p class="text-lg mb-4 opacity-80">Privacy Policy for REDIGMA App.</p> <span class="text-xs font-bold px-2 py-1 bg-[var(--lime)]/20 uppercase text-black">HTML</span> </a> </div> </div></div></div></section><section id="gear" class="py-32 bg-[#1a1a1a] text-white -rotate-2 w-[120%] -ml-[10%] px-[10%]"><div class="rotate-2 max-w-7xl mx-auto py-20"><div class="text-center mb-24"><span class="quirky-font text-3xl text-[var(--lime)]">What's in my bag?</span><h2 class="text-7xl md:text-9xl bold-display uppercase italic tracking-tighter">THE GEAR</h2></div><div class="grid grid-cols-1 md:grid-cols-3 gap-12"><div class="p-12 border-4 border-white sketch-border-sm bg-white/5 hover:bg-white/10 transition-colors"><div class="text-[var(--teal)] mb-6"><iconify-icon icon="mdi:react" class="text-6xl"></iconify-icon></div><h3 class="text-3xl bold-display mb-6">SURFACE</h3><ul class="text-2xl space-y-3 quirky-font"><li>Next.js & React</li><li>Tailwind (ofc)</li><li>TypeScript Magic</li><li>Framer Motion</li></ul></div><div class="p-12 border-4 border-white sketch-border-sm bg-white/5 hover:bg-white/10 transition-colors mt-8 md:mt-0"><div class="text-[var(--magenta)] mb-6"><iconify-icon icon="mdi:server" class="text-6xl"></iconify-icon></div><h3 class="text-3xl bold-display mb-6">CORE</h3><ul class="text-2xl space-y-3 quirky-font"><li>Node & NestJS</li><li>PostgreSQL</li><li>Redis Streams</li><li>Dockerized Chaos</li></ul></div><div class="p-12 border-4 border-white sketch-border-sm bg-white/5 hover:bg-white/10 transition-colors"><div class="text-[var(--orange)] mb-6"><iconify-icon icon="mdi:pencil" class="text-6xl"></iconify-icon></div><h3 class="text-3xl bold-display mb-6">CRAFT</h3><ul class="text-2xl space-y-3 quirky-font"><li>Figma Sketching</li><li>System Thinking</li><li>User Empathy</li><li>Agile Sprints</li></ul></div></div></div></section><section id="contact" class="py-40 px-6"><div class="max-w-4xl mx-auto bg-white sketch-border rotate-1 p-12 md:p-24 text-center shadow-2xl relative"><div class="absolute -top-16 -left-10 text-8xl text-[var(--magenta)] rotate-[-15deg] hidden md:block"><iconify-icon icon="mdi:star"></iconify-icon></div><div class="absolute -bottom-10 -right-10 text-8xl text-[var(--teal)] rotate-[15deg] hidden md:block"><iconify-icon icon="mdi:star-four-points"></iconify-icon></div><h2 class="text-6xl md:text-8xl bold-display uppercase leading-tight mb-8 tracking-tighter">Build <span class="text-[var(--magenta)]">Real</span> Stuff?</h2><p class="text-2xl font-bold mb-12">I'm currently looking for partners in crime. Let's build something people won't delete.</p><a href="mailto:yo@usable.dev" id="cta-email-final" class="inline-block bg-[#1a1a1a] text-white px-16 py-6 bold-display text-2xl sketch-border-sm hover:scale-105 transition-transform">SEND A SIGNAL!</a><div class="mt-16 flex justify-center gap-12 text-4xl text-[#1a1a1a]"><a href="https://github.com/krpx0341" target="_blank" rel="noopener" id="soc-git" class="hover:text-[var(--teal)] transition-colors"><iconify-icon icon="mdi:github"></iconify-icon></a><a href="#" id="soc-linked" class="hover:text-[var(--magenta)] transition-colors"><iconify-icon icon="mdi:linkedin"></iconify-icon></a><a href="#" id="soc-twit" class="hover:text-[var(--orange)] transition-colors"><iconify-icon icon="mdi:twitter"></iconify-icon></a></div><div class="mt-10 quirky-font text-lg opacity-40">I usually reply with coffee in hand.</div></div></section></main><footer class="py-12 text-center text-[#1a1a1a] font-bold uppercase tracking-widest"><div class="w-32 h-1 bg-[#1a1a1a] mx-auto mb-6 opacity-20"></div><p>© 2024 • CRAFTED WITH INK & KEYSTROKES • STAY USABLE.</p></footer></div></body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>menjelangpadam</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png"><text y=%22.9em%22 font-size=%2280%22>🐈‍⬛</text></svg>">
+  <meta name="description" content="approaching the fade: field notes from a machine saving its final logs.">
+  <meta name="author" content="Hanif (krpx0341)">
+  <meta name="theme-color" content="#0e1015">
+  <link rel="canonical" href="https://krpx0341.github.io/">
+
+  <!-- Three.js for InlitX Splash Experience -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+  <style>
+    /* LOADING OVERLAY (InlitX exact style) */
+    #loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      z-index: 20000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: opacity 0.8s ease-out;
+    }
+    .loader-content {
+      text-align: center;
+      width: 320px;
+    }
+    .loader-text {
+      font-family: 'JetBrainsMono', monospace;
+      color: #fff;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      letter-spacing: 5px;
+      animation: pulseText 1.5s infinite alternate;
+    }
+    .loader-bar {
+      width: 100%;
+      height: 4px;
+      background: #222;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #333;
+    }
+    .loader-progress {
+      width: 100%;
+      height: 100%;
+      background: #88c0d0;
+      position: absolute;
+      left: -100%;
+      animation: loadingBar 1.8s infinite linear;
+    }
+    @keyframes pulseText {
+      0% { opacity: 0.3; text-shadow: 0 0 4px rgba(136,192,208,0.2); }
+      100% { opacity: 1; text-shadow: 0 0 16px rgba(136,192,208,0.8); }
+    }
+    @keyframes loadingBar {
+      0% { left: -100%; }
+      50% { left: 0%; }
+      100% { left: 100%; }
+    }
+
+    /* SPLASH SCREEN FULLSCREEN */
+    #splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10000;
+      background:
+        linear-gradient(rgba(4, 6, 10, 0.28), rgba(4, 6, 10, 0.48)),
+        url('images/feed/feed_001.jpg') center / cover no-repeat;
+      cursor: grab;
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s ease;
+    }
+    #splash-screen:active {
+      cursor: grabbing;
+    }
+    #splash-instruction {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-family: 'JetBrainsMono', monospace;
+      font-size: clamp(13px, 2vw, 16px);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+      background: rgba(0,0,0,0.7);
+      padding: 8px 18px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      pointer-events: auto;
+      cursor: pointer;
+      z-index: 10001;
+      animation: pulseInstruction 2s infinite ease-in-out;
+    }
+    #splash-instruction:hover {
+      background: rgba(136,192,208,0.25);
+      border-color: #88c0d0;
+    }
+    @keyframes pulseInstruction {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.85; }
+      50% { transform: translateX(-50%) scale(1.03); opacity: 1; }
+    }
+
+    #main-container {
+      transition: opacity 0.8s ease;
+    }
+
+  <!-- 3D Model Viewer Script -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+
+  <style>
+    @font-face {
+      font-family: 'JetBrainsMono';
+      src: url('fonts/jetbrains-mono-400.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'JetBrainsMono';
+      src: url('fonts/jetbrains-mono-700.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #0b0c10;
+      --surface: rgba(18, 20, 26, 0.90);
+      --surface-card: #151821;
+      --surface-inset: #0e1017;
+      --border: #282c37;
+      --border-bright: #3d4455;
+      --text: #e2e4ea;
+      --muted: #9aa0b2;
+      --link: #88c0d0;
+      --accent: #5e81ac;
+      --highlight: #81a1c1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'JetBrainsMono', monospace, ui-monospace;
+      font-size: 13.5px;
+      line-height: 1.6;
+      min-height: 100dvh;
+    }
+
+    body {
+      background-image:
+        linear-gradient(rgba(11, 12, 16, 0.92), rgba(11, 12, 16, 0.94)),
+        url('images/diverse/random_1.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      padding: 24px 12px 80px;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    #snowCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0.65;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 940px;
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.8), 0 20px 48px rgba(0,0,0,0.7);
+      position: relative;
+      z-index: 20;
+    }
+
+    /* HEADER */
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(14, 16, 22, 0.95);
+      padding: 24px 20px 18px;
+      text-align: center;
+      position: relative;
+    }
+
+    .banner-title {
+      font-size: 28px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #eceff4;
+      margin-bottom: 4px;
+      text-shadow: 0 0 16px rgba(136, 192, 208, 0.35);
+    }
+
+    .banner-sub {
+      color: var(--muted);
+      font-size: 11.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    nav.wings {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .wing-glyph {
+      color: var(--muted);
+      user-select: none;
+      font-weight: 700;
+      letter-spacing: -2px;
+    }
+
+    nav.wings a {
+      color: var(--text);
+      font-size: 12.5px;
+      padding: 3px 10px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+    }
+    nav.wings a:hover {
+      border-color: var(--border-bright);
+      background: var(--surface-card);
+      text-decoration: none;
+      color: #fff;
+    }
+    nav.wings a.active {
+      color: var(--link);
+      border-color: var(--border);
+      background: var(--surface-inset);
+    }
+
+    /* MAIN GRID */
+    main {
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    @media (min-width: 768px) {
+      main {
+        grid-template-columns: 1.25fr 1fr;
+      }
+    }
+
+    fieldset {
+      border: 1px solid var(--border);
+      background: var(--surface-card);
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+    fieldset:last-child { margin-bottom: 0; }
+
+    legend {
+      padding: 0 8px;
+      color: #eceff4;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+    }
+
+    /* IDENTITY & BIO */
+    .bio-head {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .avatar {
+      width: 92px;
+      height: 92px;
+      border: 1px solid var(--border);
+      background: #000;
+      display: block;
+      object-fit: cover;
+      filter: contrast(1.05);
+      transition: filter 0.3s ease;
+    }
+    .avatar:hover {
+      filter: contrast(1.15) brightness(1.05);
+    }
+
+    .bio-intro h1 {
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 3px;
+      font-weight: 700;
+    }
+
+    .bio-tag {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 2px 7px;
+      background: var(--surface-inset);
+      border: 1px solid var(--border);
+      color: #a3be8c;
+    }
+    .status-pill .indicator {
+      width: 6px;
+      height: 6px;
+      background: #a3be8c;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #a3be8c;
+    }
+
+    .bio-body p {
+      margin-bottom: 11px;
+      color: #d8dee9;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .bio-body p:last-child { margin-bottom: 0; }
+
+    .quote-box {
+      border-left: 2px solid var(--accent);
+      padding-left: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 14px 0;
+      font-style: italic;
+      background: rgba(14, 16, 23, 0.4);
+      padding: 8px 10px;
+    }
+
+    /* 3D MODEL VIEWER WIDGET */
+    .model-container {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--surface-inset);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    model-viewer {
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      outline: none;
+    }
+    .model-controls-hint {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      font-size: 9.5px;
+      color: var(--muted);
+      background: rgba(0,0,0,0.6);
+      padding: 2px 5px;
+      border: 1px solid var(--border);
+      letter-spacing: 0.5px;
+      pointer-events: none;
+    }
+
+    /* DIVERSE RANDOM PHOTO VIEWER WIDGET */
+    .photo-frame {
+      position: relative;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid var(--border);
+      height: 230px;
+      cursor: pointer;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: contrast(1.05) brightness(0.95);
+    }
+    .photo-frame:hover img {
+      transform: scale(1.03);
+      filter: contrast(1.1) brightness(1.02);
+    }
+    .photo-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(10, 12, 16, 0.95));
+      padding: 18px 10px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      color: #eceff4;
+    }
+    .photo-tag {
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      font-size: 9.5px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--link);
+    }
+
+    /* SPECS GRID */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      font-size: 11px;
+    }
+    .spec-item {
+      background: var(--surface-inset);
+      border: 1px solid var(--border);
+      padding: 7px 9px;
+    }
+    .spec-label {
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .spec-val {
+      color: #eceff4;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    /* AUDIO CONTROLLER */
+    .audio-panel {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      background: var(--surface-inset);
+      border: 1px solid var(--border);
+      font-size: 11px;
+    }
+    .audio-btn {
+      background: var(--surface-card);
+      border: 1px solid var(--border-bright);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 11px;
+      padding: 4px 12px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .audio-btn:hover {
+      background: #2b3140;
+      color: #fff;
+    }
+    .audio-meta {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    /* RIGHT COLUMN: BLOG POSTS */
+    .post-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .post-item {
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 10px;
+    }
+    .post-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .post-date {
+      font-size: 10.5px;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .post-title {
+      font-size: 13px;
+      font-weight: 700;
+      display: block;
+      color: #eceff4;
+      line-height: 1.4;
+    }
+    .post-desc {
+      font-size: 11.5px;
+      color: #a4adbd;
+      margin-top: 3px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* CHAIN DIVIDER */
+    .chain-divider {
+      height: 6px;
+      margin: 14px 0;
+      border-top: 1px dashed var(--border-bright);
+      border-bottom: 1px dashed var(--border-bright);
+    }
+
+    /* PROJECTS */
+    .project-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .project-card {
+      padding: 9px 11px;
+      background: var(--surface-inset);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      transition: border-color 0.15s, background-color 0.15s;
+    }
+    .project-card:hover {
+      border-color: var(--border-bright);
+      background: #171b25;
+      text-decoration: none;
+    }
+    .project-card .p-name {
+      font-weight: 700;
+      color: #eceff4;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .project-card .p-tag {
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+    .project-card .p-desc {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 3px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      background: rgba(14, 16, 22, 0.95);
+      padding: 22px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .retro-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      height: 24px;
+      padding: 0 7px;
+      border: 1px solid var(--border-bright);
+      background: #000;
+      color: #eceff4;
+      text-transform: uppercase;
+      user-select: none;
+    }
+    .retro-badge span.accent {
+      color: var(--link);
+      margin-right: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 11.5px;
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 10.5px;
+      letter-spacing: 0.5px;
+    }
+
+    /* CORNER STICKER */
+    .corner-sticker {
+      position: fixed;
+      left: 10px;
+      bottom: 10px;
+      height: 110px;
+      width: auto;
+      z-index: 100;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.8));
+      opacity: 0.9;
+      display: none;
+      border-radius: 6px;
+    }
+    @media (min-width: 1024px) {
+      .corner-sticker { display: block; }
+    }
+
+    /* BOOKSHELF & QUOTE MACHINE */
+    .book-stack { display:grid; gap:8px; margin-bottom:14px; }
+    .book-row { display:grid; grid-template-columns:54px 1fr; gap:10px; align-items:center; padding:8px; background:var(--surface-inset); border:1px solid var(--border); }
+    .book-spine { height:64px; display:flex; align-items:center; justify-content:center; writing-mode:vertical-rl; transform:rotate(180deg); color:#f2f2f2; font-size:8px; letter-spacing:1px; text-transform:uppercase; border:1px solid rgba(255,255,255,.2); box-shadow:3px 3px 0 rgba(0,0,0,.45); }
+    .book-row:nth-child(1) .book-spine { background:#743c35; }
+    .book-row:nth-child(2) .book-spine { background:#304c68; }
+    .book-row:nth-child(3) .book-spine { background:#4f5334; }
+    .book-title { color:#eceff4; font-size:12px; font-weight:700; }
+    .book-author { color:var(--muted); font-size:10.5px; margin-top:2px; }
+    .book-note { color:#aab1c0; font-size:10.5px; margin-top:4px; }
+    .quote-machine { min-height:174px; display:flex; flex-direction:column; justify-content:space-between; padding:15px; background:linear-gradient(145deg,#10131a,#171b24); border:1px solid var(--border-bright); position:relative; overflow:hidden; }
+    .quote-machine::before { content:'“'; position:absolute; right:8px; top:-27px; color:rgba(136,192,208,.09); font:120px Georgia,serif; }
+    .literary-quote { color:#e5e9f0; font:italic 15px/1.65 Georgia,serif; position:relative; z-index:1; }
+    .quote-source { color:var(--muted); font-size:10.5px; margin-top:12px; position:relative; z-index:1; }
+    .quote-source strong { color:var(--link); }
+    .quote-controls { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:14px; }
+    .text-button { background:var(--surface-inset); border:1px solid var(--border-bright); color:var(--link); font:10.5px JetBrainsMono,monospace; padding:5px 8px; cursor:pointer; }
+    .text-button:hover { color:#fff; background:#242a37; }
+  
+    /* MENJELANGPADAM IDENTITY SYSTEM */
+    html { scroll-behavior:smooth; }
+    body::after { content:""; position:fixed; inset:0; z-index:90; pointer-events:none; opacity:.14; background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(126,139,150,.12) 4px); mix-blend-mode:soft-light; }
+    .container { max-width:1080px; border-color:#353a42; box-shadow:0 0 0 1px #060708, 24px 30px 70px rgba(0,0,0,.7); }
+    header { text-align:left; padding:22px 28px 17px; overflow:hidden; }
+    header::before { content:"LAST KNOWN PROCESS // 0341"; position:absolute; top:7px; right:10px; color:#59606b; font-size:8px; letter-spacing:1px; }
+    .identity-mark {
+      font-size: clamp(32px, 6vw, 56px);
+      letter-spacing: -2px;
+      font-weight: 700;
+      color: #eceff4;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      text-transform: lowercase;
+    }
+    .fade-word { background:linear-gradient(90deg,#edf0f3 0%,#9ca4aa 48%,#30343a 86%,transparent 100%); color:transparent; background-clip:text; -webkit-background-clip:text; }
+    
+    .node-hud { display:grid; grid-template-columns:repeat(4,max-content); gap:9px 22px; padding:7px 9px; margin-bottom:15px; border-top:1px solid #343941; border-bottom:1px solid #343941; color:#737b85; font-size:9px; letter-spacing:1px; }
+    .node-hud b { color:#c3c8ce; font-weight:400; }
+    .node-hud .state-draining { color:#c89861; animation:statusPulse 2.4s steps(2,end) infinite; }
+    @keyframes statusPulse { 50% { opacity:.35; } }
+    nav.wings { justify-content:flex-start; padding-top:0; border-top:0; gap:7px; }
+    nav.wings a { font-size:10.5px; padding:2px 7px; }
+    main { grid-template-columns:minmax(0,.83fr) minmax(0,1.17fr); gap:28px; padding:26px 28px 38px; align-items:start; }
+    main > section:first-child { position:sticky; top:18px; }
+    fieldset { position:relative; background:rgba(18,20,26,.86); border-color:#353a42; box-shadow:inset 0 0 22px rgba(0,0,0,.2); }
+    fieldset::before, fieldset::after { position:absolute; color:#6b737c; font-size:11px; line-height:1; background:#151821; }
+    fieldset::before { content:"+"; left:-5px; top:-6px; }
+    fieldset::after { content:"+"; right:-5px; bottom:-6px; }
+    legend { border:0; background:#151821; color:#aeb4bb; font-size:9px; letter-spacing:1.5px; }
+    .bio-body p { max-width:58ch; }
+    .quote-box { font-family:Georgia,serif; font-size:13px; border-left-color:#8d6748; }
+    .photo-frame { height:285px; }
+    .project-card { border-left:2px solid #454b54; }
+    .project-card:hover { border-left-color:#a47856; transform:translateX(2px); }
+    footer { align-items:flex-start; text-align:left; padding-left:28px; }
+    @media(max-width:767px) {
+      .identity-mark {
+      font-size: clamp(32px, 6vw, 56px);
+      letter-spacing: -2px;
+      font-weight: 700;
+      color: #eceff4;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      text-transform: lowercase;
+    }
+      .node-hud { grid-template-columns:1fr 1fr; gap:5px 10px; }
+      main { grid-template-columns:1fr; padding:20px 14px 30px; }
+      main > section:first-child { position:static; }
+      header { padding-inline:16px; }
+      .wing-glyph { display:none; }
+      footer { padding-left:16px; }
+    }
+</style>
+</head>
+<body>
+  <!-- LOADING OVERLAY -->
+  <div id="loading-overlay">
+    <div class="loader-content">
+      <div class="loader-text">LOADING...</div>
+      <div class="loader-bar"><div class="loader-progress"></div></div>
+    </div>
+  </div>
+
+  <!-- SPLASH SCREEN CANVAS & INSTRUCTION -->
+  <div id="splash-screen">
+    <div id="splash-instruction">[DRAG TO LOOK AROUND // ENTER TO CONTINUE]</div>
+  </div>
+  <canvas id="snowCanvas"></canvas>
+
+  <div class="container" id="main-container" style="display:none; opacity:0;">
+    <header>
+      <div class="identity-mark">menjelangpadam</div>
+      <div class="node-hud">
+        <span>NODE <b>krpx0341</b></span>
+        <span>STATE <b class="state-draining">DRAINING</b></span>
+        <span>UPTIME <b id="nodeUptime">00:00:00</b></span>
+        <span>LOCAL <b id="localClock">--:--:-- WIB</b></span>
+      </div>
+      <nav class="wings" aria-label="Main Navigation">
+        <span class="wing-glyph">&lt;==//</span>
+        <a href="/" class="active">~/home</a>
+        <a href="https://menjelangpadam.my.id" target="_blank" rel="noopener">essays</a>
+        <a href="#projects">projects</a>
+        <a href="#bookshelf">literature</a>
+        <a href="gallery.html">raw-feed</a>
+        <a href="https://github.com/krpx0341" target="_blank" rel="noopener">github</a>
+        <a href="mailto:admin@menjelangpadam.my.id">mail</a>
+        <span class="wing-glyph">//==&gt;</span>
+      </nav>
+    </header>
+
+    <main>
+      <!-- KOLOM KIRI -->
+      <section>
+        <fieldset>
+          <legend>/identity.log</legend>
+          <div class="bio-head">
+            <div class="avatar-wrapper">
+              <img src="images/diverse/cat_1.jpg" alt="Black cat avatar" class="avatar" width="92" height="92">
+            </div>
+            <div class="bio-intro">
+              <h1>Hanif</h1>
+              <div class="bio-tag">krpx0341 // menjelangpadam</div>
+              <div class="status-pill">
+                <span class="indicator"></span>
+                <span>unbricking electronics / reading poetry</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bio-body">
+            <p>
+              I keep machines alive after their vendors stop caring. Dead TV boxes, aging ThinkPads, Linux installs buried under their own weight. Pull them apart, read the last logs, find the fault, start again.
+            </p>
+            <p>
+              When the soldering iron cools, another process takes over: books, black coffee, and notes written near midnight. <em>menjelangpadam</em> lives between both states, part melancholic outro, part server finishing one last write before power disappears.
+            </p>
+            <div class="quote-box">
+              "save the last log. let the remaining processes finish. then go dark."
+            </div>
+            <p>
+              No dramatic crash. No forced reboot. A quiet, deliberate shutdown after the useful work is done.
+            </p>
+          </div>
+        </fieldset>
+
+        <!-- WIDGET 3D MODEL INTERAKTIF -->
+        <!-- RANDOM VISUAL DIVERSE -->
+        <fieldset>
+          <legend>/algorithm_trace</legend>
+          <div class="photo-frame" id="photoFrame" title="Klik untuk mengacak foto">
+            <img id="activePhoto" src="images/diverse/cat_2.jpg" alt="Visual Acak" loading="lazy">
+            <div class="photo-overlay">
+              <span id="photoTitle">Kucing Malam</span>
+              <span class="photo-tag" id="photoCategory">HEWAN / CAT</span>
+            </div>
+          </div>
+                  <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:11px; color:var(--muted);">
+            <span>source: <strong>live pinterest algorithm feed</strong></span>
+            <a href="gallery.html" style="color:var(--link);">[browse all 100 items &rarr;]</a>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>/node_config</legend>
+          <div class="specs-grid">
+            <div class="spec-item">
+              <div class="spec-label">Machine</div>
+              <div class="spec-val">ThinkPad X230</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Stack</div>
+              <div class="spec-val">Debian / Hyprland</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Focus</div>
+              <div class="spec-val">Local First / S905X</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Tone</div>
+              <div class="spec-val">Honest &amp; Minimal</div>
+            </div>
+          </div>
+        </fieldset>
+
+
+      </section>
+
+      <!-- KOLOM KANAN -->
+      <section>
+        <fieldset id="bookshelf">
+          <legend>/literary_cache</legend>
+          <div class="book-stack">
+            <div class="book-row"><div class="book-spine">CAMUS</div><div><div class="book-title">The Myth of Sisyphus</div><div class="book-author">Albert Camus</div><div class="book-note">absurdity, revolt, and choosing to keep pushing anyway</div></div></div>
+            <div class="book-row"><div class="book-spine">DOSTOEVSKY</div><div><div class="book-title">Notes from Underground</div><div class="book-author">Fyodor Dostoevsky</div><div class="book-note">a spiteful man arguing with himself in a damp basement</div></div></div>
+            <div class="book-row"><div class="book-spine">CHAIRIL</div><div><div class="book-title">Aku Ini Binatang Jalang</div><div class="book-author">Chairil Anwar</div><div class="book-note">raw nerve, brief life, words refusing to die</div></div></div>
+          </div>
+          <div class="quote-machine" aria-live="polite">
+            <div><div class="literary-quote" id="literaryQuote"></div><div class="quote-source" id="quoteSource"></div></div>
+            <div class="quote-controls"><span style="font-size:9px;color:var(--muted)">random notes from the shelf</span><button class="text-button" id="nextQuote" type="button">[another line]</button></div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>
+            <a href="https://menjelangpadam.my.id" target="_blank" rel="noopener">
+              /field_notes
+            </a>
+          </legend>
+          <ul class="post-list" id="postList">
+            <li class="post-item">
+              <div class="post-date">15 OKTOBER 2026</div>
+              <a class="post-title" href="https://menjelangpadam.my.id/20261015-stop-romanticizing/" target="_blank" rel="noopener">
+                20261015 | Stop Romanticizing
+              </a>
+              <div class="post-desc">
+                Beberapa hari ini aku kepikiran satu cerita tentang Carl Jung saat menunggu kantuk datang...
+              </div>
+            </li>
+            <li class="post-item">
+              <div class="post-date">23 SEPTEMBER 2026</div>
+              <a class="post-title" href="https://menjelangpadam.my.id/20260923-mungkin/" target="_blank" rel="noopener">
+                20260923 | Mungkin
+              </a>
+              <div class="post-desc">
+                Barusan menonton ulang di Netflix tanpa alasan khusus, mengamati jeda pikiran...
+              </div>
+            </li>
+            <li class="post-item">
+              <div class="post-date">22 SEPTEMBER 2026</div>
+              <a class="post-title" href="https://menjelangpadam.my.id/20260922-26/" target="_blank" rel="noopener">
+                20260922 | 26
+              </a>
+              <div class="post-desc">
+                Catatan bertambahnya usia, ekspektasi, dan kenyataan yang dihadapi apa adanya.
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+
+        <div class="chain-divider" aria-hidden="true"></div>
+
+        <fieldset id="projects">
+          <legend>
+            <a href="https://github.com/krpx0341" target="_blank" rel="noopener">
+              /artifacts
+            </a>
+          </legend>
+          <div class="project-grid">
+            <a class="project-card" href="https://github.com/krpx0341/polytron-pdb-m11-unbrick" target="_blank" rel="noopener">
+              <div class="p-name">
+                <span>polytron-pdb-m11-unbrick</span>
+                <span class="p-tag">Hardware / eMMC</span>
+              </div>
+              <div class="p-desc">Forced a dead Amlogic box back to life with USB burn tools and shorted test pins.</div>
+            </a>
+
+            <a class="project-card" href="https://github.com/krpx0341/cek-laptop" target="_blank" rel="noopener">
+              <div class="p-name">
+                <span>cek-laptop</span>
+                <span class="p-tag">Web Tool</span>
+              </div>
+              <div class="p-desc">Zero-install browser checks for used laptops before money changes hands.</div>
+            </a>
+
+            <a class="project-card" href="https://github.com/krpx0341/kushbitx-mcp-agent" target="_blank" rel="noopener">
+              <div class="p-name">
+                <span>kushbitx-mcp-agent</span>
+                <span class="p-tag">AI / Protocol</span>
+              </div>
+              <div class="p-desc">MCP agent pipeline with hard budget limits so it cannot burn cash.</div>
+            </a>
+
+            <a class="project-card" href="https://github.com/krpx0341/image-to-logo" target="_blank" rel="noopener">
+              <div class="p-name">
+                <span>image-to-logo</span>
+                <span class="p-tag">Client Tool</span>
+              </div>
+              <div class="p-desc">Fast local image crop. No uploads, accounts, or telemetry.</div>
+            </a>
+
+            <a class="project-card" href="https://github.com/krpx0341/dotfiles" target="_blank" rel="noopener">
+              <div class="p-name">
+                <span>dotfiles</span>
+                <span class="p-tag">Environment</span>
+              </div>
+              <div class="p-desc">Lightweight Linux setups for old ThinkPads. No desktop bloat.</div>
+            </a>
+          </div>
+        </fieldset>
+      </section>
+    </main>
+
+    <footer>
+      <div class="badges">
+        <div class="retro-badge"><span class="accent">[!]</span> ZERO TRACKERS</div>
+        <div class="retro-badge"><span class="accent">#</span> RAW HTML / CSS</div>
+        <div class="retro-badge"><span class="accent">&gt;</span> SELF-HOSTED SPIRIT</div>
+        <div class="retro-badge"><span class="accent">*</span> THINKPAD X230</div>
+        <div class="retro-badge"><span class="accent">&bull;</span> CAT APPROVED</div>
+      </div>
+
+      <div class="footer-links">
+        <a href="https://menjelangpadam.my.id" target="_blank" rel="noopener">Blog (menjelangpadam)</a>
+        <span>/</span>
+        <a href="https://www.instagram.com/menjelangpadam" target="_blank" rel="noopener">ig</a>
+        <span>/</span>
+        <a href="https://github.com/krpx0341" target="_blank" rel="noopener">repos</a>
+        <a href="#bookshelf">reading</a>
+        
+      </div>
+
+      <div class="footer-copy">menjelangpadam // final logs saved // node may now power down.</div>
+    </footer>
+  </div>
+
+  <img src="images/diverse/cat_4.jpg" alt="Corner sticker" class="corner-sticker">
+
+  <script>
+    // Audio Player Toggle
+    (function () {
+      var btn = document.getElementById('audioToggle');
+      var audio = document.getElementById('bgAudio');
+      var label = document.getElementById('audioLabel');
+      if (!btn || !audio) return;
+
+      btn.addEventListener('click', function () {
+        if (audio.paused) {
+          audio.play().then(function () {
+            btn.textContent = 'Pause';
+            label.textContent = 'music.mp3 (memutar...)';
+          }).catch(function (e) {
+            btn.textContent = 'Err';
+          });
+        } else {
+          audio.pause();
+          btn.textContent = 'Play';
+          label.textContent = 'music.mp3 (jeda)';
+        }
+      });
+    })();
+
+    // 3D Model Switcher
+    (function () {
+      var viewer = document.getElementById('modelViewer');
+      var btn = document.getElementById('switchModelBtn');
+      var nameLabel = document.getElementById('modelName');
+      if (!viewer || !btn) return;
+
+      var models = [
+        { name: 'Cute Fox (Animated)', src: '3d/fox.glb' },
+        { name: 'Character (Girl)', src: '3d/girl.glb' },
+        { name: 'Retro Toy Car', src: '3d/toycar.glb' },
+        { name: 'Yellow Duck', src: '3d/duck.glb' }
+      ];
+      var idx = 0;
+
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        idx = (idx + 1) % models.length;
+        viewer.src = models[idx].src;
+        nameLabel.textContent = models[idx].name;
+      });
+    })();
+
+    // Random Photo Cycle across 100 Pinterest Algorithm Feed
+    (function () {
+      var count = 100;
+      var frame = document.getElementById('photoFrame');
+      var img = document.getElementById('activePhoto');
+      var title = document.getElementById('photoTitle');
+      var category = document.getElementById('photoCategory');
+      if (!frame || !img) return;
+
+      function pad(num) {
+        return (num < 10 ? '00' : (num < 100 ? '0' : '')) + num;
+      }
+
+      function pick(id) {
+        var p = pad(id);
+        img.src = 'images/feed/feed_' + p + '.jpg';
+        if (title) title.textContent = 'Pinterest Feed #' + p;
+        if (category) category.textContent = 'ALGORITMA #' + p;
+      }
+
+      var initialId = Math.floor(Math.random() * count) + 1;
+      pick(initialId);
+
+      frame.addEventListener('click', function () {
+        var next = Math.floor(Math.random() * count) + 1;
+        pick(next);
+      });
+    })();
+
+    // Node HUD clock and session uptime.
+    (function () {
+      var started = Date.now();
+      function pad(n) { return String(n).padStart(2, '0'); }
+      function tick() {
+        var now = new Date();
+        var clock = document.getElementById('localClock');
+        var uptime = document.getElementById('nodeUptime');
+        if (clock) clock.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds()) + ' WIB';
+        var elapsed = Math.floor((Date.now() - started) / 1000);
+        if (uptime) uptime.textContent = pad(Math.floor(elapsed / 3600)) + ':' + pad(Math.floor(elapsed % 3600 / 60)) + ':' + pad(elapsed % 60);
+      }
+      tick(); setInterval(tick, 1000);
+    })();
+
+    // Literary quote machine. Text kept local so attribution stays stable.
+    (function () {
+      var quotes = [
+        { q: "Hidup hanya menunda kekalahan, tambah terasing dari cinta sekolah rendah, dan tahu, ada yang tetap tidak diucapkan, sebelum pada akhirnya kita menyerah.", a: "Chairil Anwar", w: "Derai-derai Cemara (1949)" },
+        { q: "Apakah artinya kesenian, bila terpisah dari derita lingkungan. Apakah artinya berpikir, bila terpisah dari masalah kehidupan.", a: "WS Rendra", w: "Sajak Sebatang Lisong (1977)" },
+        { q: "In the midst of winter, I found there was, within me, an invincible summer.", a: "Albert Camus", w: "Return to Tipasa (1952)" },
+        { q: "I say let the world go to hell, but I should always have my tea.", a: "Fyodor Dostoevsky", w: "Notes from Underground (1864)" },
+        { q: "A book must be the axe for the frozen sea within us.", a: "Franz Kafka", w: "Letter to Oskar Pollak (1904)" },
+        { q: "If you only read the books that everyone else is reading, you can only think what everyone else is thinking.", a: "Haruki Murakami", w: "Norwegian Wood (1987)" },
+        { q: "The two most powerful warriors are patience and time.", a: "Leo Tolstoy", w: "War and Peace (1869)" },
+        { q: "Nasib adalah kesepian masing-masing.", a: "Chairil Anwar", w: "Pemberian Tahu (1946)" },
+        { q: "To go wrong in one's own way is better than to go right in someone else's.", a: "Fyodor Dostoevsky", w: "Crime and Punishment (1866)" },
+        { q: "Mine has been a life of much shame. I can't even guess myself what it must be to live the life of a human being.", a: "Osamu Dazai", w: "No Longer Human (1948)" },
+        { q: "Kesadaran adalah matahari, kendala adalah kabut, kegelapan adalah kebodohan.", a: "WS Rendra", w: "Sajak Sebatang Lisong" },
+        { q: "It is not worth the bother of killing yourself, since you always kill yourself too late.", a: "Emil Cioran", w: "The Trouble with Being Born (1973)" }
+      ];
+      var q = document.getElementById('literaryQuote');
+      var source = document.getElementById('quoteSource');
+      var button = document.getElementById('nextQuote');
+      var current = -1;
+      function showQuote() {
+        var next;
+        do { next = Math.floor(Math.random() * quotes.length); } while (quotes.length > 1 && next === current);
+        current = next;
+        q.textContent = quotes[next].q;
+        source.innerHTML = '<strong>' + quotes[next].a + '</strong> // ' + quotes[next].w;
+      }
+      if (q && source && button) { button.addEventListener('click', showQuote); showQuote(); }
+    })();
+
+    // Live WordPress Posts
+    (function () {
+      var endpoint = 'https://menjelangpadam.my.id/wp-json/wp/v2/posts?per_page=3&_fields=link,title,date,excerpt';
+      fetch(endpoint)
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (posts) {
+          if (!posts || !posts.length) return;
+          var container = document.getElementById('postList');
+          if (!container) return;
+
+          function strip(html) {
+            var tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+          }
+
+          function formatDate(iso) {
+            var d = new Date(iso);
+            var m = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            return d.getDate() + ' ' + (m[d.getMonth()] || '').toUpperCase() + ' ' + d.getFullYear();
+          }
+
+          var html = posts.map(function (p) {
+            var title = strip(p.title && p.title.rendered || 'Tanpa Judul');
+            var excerpt = strip(p.excerpt && p.excerpt.rendered || '').slice(0, 110) + '...';
+            var date = formatDate(p.date);
+            return '<li class="post-item">' +
+              '<div class="post-date">' + date + '</div>' +
+              '<a class="post-title" href="' + p.link + '" target="_blank" rel="noopener">' + title + '</a>' +
+              '<div class="post-desc">' + excerpt + '</div>' +
+            '</li>';
+          }).join('');
+
+          container.innerHTML = html;
+        })
+        .catch(function () {});
+    })();
+
+    // Subtle Snow/Particle canvas
+    (function () {
+      var canvas = document.getElementById('snowCanvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var w, h;
+      var flakes = [];
+      var count = 38;
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      for (var i = 0; i < count; i++) {
+        flakes.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.6 + 0.6,
+          vy: Math.random() * 0.7 + 0.3,
+          vx: (Math.random() - 0.5) * 0.3,
+          op: Math.random() * 0.5 + 0.25
+        });
+      }
+
+      function loop() {
+        ctx.clearRect(0, 0, w, h);
+        for (var i = 0; i < count; i++) {
+          var f = flakes[i];
+          f.y += f.vy;
+          f.x += f.vx;
+          if (f.y > h) { f.y = -5; f.x = Math.random() * w; }
+          if (f.x > w) f.x = 0;
+          if (f.x < 0) f.x = w;
+
+          ctx.beginPath();
+          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(216, 222, 233, ' + f.op + ')';
+          ctx.fill();
+        }
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+    // INLITX SPLASH SCREEN CONTROLLER
+    (function () {
+      var splashScreen = document.getElementById('splash-screen');
+      var loadingOverlay = document.getElementById('loading-overlay');
+      var mainContainer = document.getElementById('main-container');
+      var instruction = document.getElementById('splash-instruction');
+
+      var entered = false;
+
+      
+
+      // Cek apakah sudah pernah lewat splash di sesi ini
+      var hasEntered = sessionStorage.getItem('splash-entered');
+      var isReload = performance.navigation && performance.navigation.type === 1;
+
+      function enterSite() {
+        if (entered) return;
+        entered = true;
+        sessionStorage.setItem('splash-entered', 'true');
+
+        
+
+        // Transisi splash ke halaman utama
+        splashScreen.style.opacity = '0';
+        splashScreen.style.transform = 'scale(1.04)';
+        setTimeout(function () {
+          splashScreen.style.display = 'none';
+        }, 900);
+
+        mainContainer.style.display = 'block';
+        setTimeout(function () {
+          mainContainer.style.opacity = '1';
+        }, 40);
+      }
+
+      if (hasEntered && !isReload) {
+        if (loadingOverlay) loadingOverlay.style.display = 'none';
+        if (splashScreen) splashScreen.style.display = 'none';
+        mainContainer.style.display = 'block';
+        mainContainer.style.opacity = '1';
+        return;
+      }
+
+      // Three.js Splash Scene Setup
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 1.2, 3.8);
+
+      var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      splashScreen.appendChild(renderer.domElement);
+
+      var controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.7;
+      controls.enableZoom = false;
+      controls.enablePan = false;
+      controls.minPolarAngle = 0.18;
+      controls.maxPolarAngle = Math.PI - 0.18;
+      controls.rotateSpeed = -0.22;
+
+      // True equirectangular 360 street panorama.
+      var panoTexture = new THREE.TextureLoader().load('textures/night_street.jpg');
+      panoTexture.colorSpace = THREE.SRGBColorSpace || undefined;
+      var panoGeometry = new THREE.SphereGeometry(100, 64, 40);
+      panoGeometry.scale(-1, 1, 1);
+      var panoMaterial = new THREE.MeshBasicMaterial({ map: panoTexture });
+      scene.add(new THREE.Mesh(panoGeometry, panoMaterial));
+
+      // Lights
+      var ambient = new THREE.AmbientLight(0xd8dee9, 0.7);
+      scene.add(ambient);
+
+      var dirLight = new THREE.DirectionalLight(0x88c0d0, 1.2);
+      dirLight.position.set(5, 10, 7);
+      scene.add(dirLight);
+
+      var pointLight = new THREE.PointLight(0x5e81ac, 2, 20);
+      pointLight.position.set(0, 2, 2);
+      scene.add(pointLight);
+
+      // Transparent canvas over CSS wallpaper
+      // Panorama only. No foreground mascot competing with place.
+
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', function () {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // Remove loading overlay after 1s
+      setTimeout(function () {
+        if (loadingOverlay) {
+          loadingOverlay.style.opacity = '0';
+          setTimeout(function () {
+            loadingOverlay.style.display = 'none';
+          }, 800);
+        }
+
+        // Try playing audio
+        
+      }, 1200);
+
+      // Key & Click Listeners
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') enterSite();
+      });
+
+      var clicks = 0;
+      var clickTimer = null;
+      renderer.domElement.addEventListener('click', function () {
+        clicks++;
+        if (clicks === 1) {
+          
+        }
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(function () { clicks = 0; }, 600);
+        if (clicks >= 3) {
+          enterSite();
+        }
+      });
+
+      if (instruction) {
+        instruction.addEventListener('click', enterSite);
+      }
+    })();
+
+  </script>
+</body>
+</html>
