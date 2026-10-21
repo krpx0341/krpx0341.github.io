@@ -166,12 +166,7 @@
     }
 
     body {
-      background-image:
-        linear-gradient(rgba(11, 12, 16, 0.92), rgba(11, 12, 16, 0.94)),
-        url('images/diverse/random_1.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      background-color: var(--bg);
       padding: 24px 12px 80px;
       display: flex;
       justify-content: center;
@@ -742,9 +737,91 @@
       .wing-glyph { display:none; }
       footer { padding-left:16px; }
     }
-</style>
+
+    /* BACKGROUND SLIDESHOW (ROLLING PINTEREST ALGORITHM PINS) */
+    .bg-slideshow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -5;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .bg-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 2.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: scale(1.02);
+    }
+    .bg-slide.active {
+      opacity: 1;
+    }
+    .bg-overlay-veil {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(9, 10, 15, 0.88), rgba(9, 10, 15, 0.93));
+      backdrop-filter: blur(2px);
+    }
+
+    /* BLOG CTA BUTTON */
+    .blog-cta-wrap {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+      display: flex;
+      justify-content: flex-end;
+    }
+    .blog-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(136, 192, 208, 0.08);
+      border: 1px solid var(--link);
+      color: var(--link);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .blog-cta-btn:hover {
+      background: var(--link);
+      color: #090a0f;
+      box-shadow: 0 0 12px rgba(136, 192, 208, 0.4);
+      transform: translateY(-1px);
+    }
+    .blog-cta-btn .cta-arrow {
+      font-size: 14px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+    .blog-cta-btn:hover .cta-arrow {
+      transform: translate(2px, -2px);
+    }
+
+  </style>
 </head>
 <body>
+  <!-- ROLLING PINTEREST BACKGROUND SLIDESHOW -->
+  <div id="bg-slideshow" class="bg-slideshow" aria-hidden="true">
+    <div id="bg-slide-a" class="bg-slide active"></div>
+    <div id="bg-slide-b" class="bg-slide"></div>
+    <div class="bg-overlay-veil"></div>
+  </div>
+
   <!-- LOADING OVERLAY -->
   <div id="loading-overlay">
     <div class="loader-content">
@@ -860,19 +937,6 @@
 
       <!-- KOLOM KANAN -->
       <section>
-        <fieldset id="bookshelf">
-          <legend>/literary_cache</legend>
-          <div class="book-stack">
-            <div class="book-row"><div class="book-spine">CAMUS</div><div><div class="book-title">The Myth of Sisyphus</div><div class="book-author">Albert Camus</div><div class="book-note">absurdity, revolt, and choosing to keep pushing anyway</div></div></div>
-            <div class="book-row"><div class="book-spine">DOSTOEVSKY</div><div><div class="book-title">Notes from Underground</div><div class="book-author">Fyodor Dostoevsky</div><div class="book-note">a spiteful man arguing with himself in a damp basement</div></div></div>
-            <div class="book-row"><div class="book-spine">CHAIRIL</div><div><div class="book-title">Aku Ini Binatang Jalang</div><div class="book-author">Chairil Anwar</div><div class="book-note">raw nerve, brief life, words refusing to die</div></div></div>
-          </div>
-          <div class="quote-machine" aria-live="polite">
-            <div><div class="literary-quote" id="literaryQuote"></div><div class="quote-source" id="quoteSource"></div></div>
-            <div class="quote-controls"><span style="font-size:9px;color:var(--muted)">random notes from the shelf</span><button class="text-button" id="nextQuote" type="button">[another line]</button></div>
-          </div>
-        </fieldset>
-
         <fieldset>
           <legend>
             <a href="https://menjelangpadam.my.id" target="_blank" rel="noopener">
@@ -908,7 +972,28 @@
               </div>
             </li>
           </ul>
+        
+          <div class="blog-cta-wrap">
+            <a href="https://menjelangpadam.my.id" target="_blank" rel="noopener" class="blog-cta-btn">
+              <span>BACA SEMUA CATATAN DI MENJELANGPADAM.MY.ID</span>
+              <span class="cta-arrow">↗</span>
+            </a>
+          </div>
         </fieldset>
+        <fieldset id="bookshelf">
+          <legend>/literary_cache</legend>
+          <div class="book-stack">
+            <div class="book-row"><div class="book-spine">CAMUS</div><div><div class="book-title">The Myth of Sisyphus</div><div class="book-author">Albert Camus</div><div class="book-note">absurdity, revolt, and choosing to keep pushing anyway</div></div></div>
+            <div class="book-row"><div class="book-spine">DOSTOEVSKY</div><div><div class="book-title">Notes from Underground</div><div class="book-author">Fyodor Dostoevsky</div><div class="book-note">a spiteful man arguing with himself in a damp basement</div></div></div>
+            <div class="book-row"><div class="book-spine">CHAIRIL</div><div><div class="book-title">Aku Ini Binatang Jalang</div><div class="book-author">Chairil Anwar</div><div class="book-note">raw nerve, brief life, words refusing to die</div></div></div>
+          </div>
+          <div class="quote-machine" aria-live="polite">
+            <div><div class="literary-quote" id="literaryQuote"></div><div class="quote-source" id="quoteSource"></div></div>
+            <div class="quote-controls"><span style="font-size:9px;color:var(--muted)">random notes from the shelf</span><button class="text-button" id="nextQuote" type="button">[another line]</button></div>
+          </div>
+        </fieldset>
+
+        
 
         <div class="chain-divider" aria-hidden="true"></div>
 
@@ -1331,6 +1416,54 @@
       if (instruction) {
         instruction.addEventListener('click', enterSite);
       }
+    })();
+
+  
+    // ROLLING BACKGROUND FROM 100 PINTEREST PINS
+    (function initBackgroundRoller() {
+      const TOTAL_PINS = 100;
+      const pinUrls = Array.from({ length: TOTAL_PINS }, (_, i) => {
+        const num = String(i + 1).padStart(3, '0');
+        return `images/feed/feed_${num}.jpg`;
+      });
+
+      // Fisher-Yates shuffle
+      for (let i = pinUrls.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pinUrls[i], pinUrls[j]] = [pinUrls[j], pinUrls[i]];
+      }
+
+      const slideA = document.getElementById('bg-slide-a');
+      const slideB = document.getElementById('bg-slide-b');
+      if (!slideA || !slideB) return;
+
+      let currentIndex = 0;
+      let activeSlide = slideA;
+      let inactiveSlide = slideB;
+
+      // Initial background
+      slideA.style.backgroundImage = `url('${pinUrls[0]}')`;
+      slideA.classList.add('active');
+
+      function rollNext() {
+        currentIndex = (currentIndex + 1) % pinUrls.length;
+        const nextUrl = pinUrls[currentIndex];
+
+        const img = new Image();
+        img.onload = function() {
+          inactiveSlide.style.backgroundImage = `url('${nextUrl}')`;
+          inactiveSlide.classList.add('active');
+          activeSlide.classList.remove('active');
+
+          const temp = activeSlide;
+          activeSlide = inactiveSlide;
+          inactiveSlide = temp;
+        };
+        img.src = nextUrl;
+      }
+
+      // Roll every 10 seconds with smooth crossfade
+      setInterval(rollNext, 10000);
     })();
 
   </script>
