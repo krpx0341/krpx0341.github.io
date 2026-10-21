@@ -88,6 +88,28 @@
     #splash-screen:active {
       cursor: grabbing;
     }
+    #splash-screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 10000;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 50% 32% at 50% 49%, rgba(255, 72, 8, 0.055) 0%, rgba(5, 6, 9, 0.22) 46%, rgba(0, 0, 0, 0.82) 100%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, transparent 35%, transparent 62%, rgba(0, 0, 0, 0.72) 100%);
+      box-shadow: inset 0 0 190px 45px rgba(0, 0, 0, 0.92);
+      mix-blend-mode: multiply;
+    }
+    #splash-screen::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 10000;
+      pointer-events: none;
+      opacity: 0.14;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.46'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+    }
 
     #splash-epigraph {
       position: absolute;
@@ -1392,15 +1414,36 @@
       panoTexture.colorSpace = THREE.SRGBColorSpace || undefined;
       var panoGeometry = new THREE.SphereGeometry(100, 64, 40);
       panoGeometry.scale(-1, 1, 1);
-      var panoMaterial = new THREE.MeshBasicMaterial({ map: panoTexture });
+      // Crush the panorama into near-black blue. Fire remains the only warm light.
+      var panoMaterial = new THREE.MeshBasicMaterial({ map: panoTexture, color: 0x27303a });
       scene.add(new THREE.Mesh(panoGeometry, panoMaterial));
+
+      // Soft darkness behind the wordmark isolates its silhouette without a fake halo.
+      var shadowCanvas = document.createElement('canvas');
+      shadowCanvas.width = 512;
+      shadowCanvas.height = 256;
+      var shadowCtx = shadowCanvas.getContext('2d');
+      var shadowGradient = shadowCtx.createRadialGradient(256, 128, 20, 256, 128, 235);
+      shadowGradient.addColorStop(0, 'rgba(0, 0, 0, 0.76)');
+      shadowGradient.addColorStop(0.56, 'rgba(0, 0, 0, 0.42)');
+      shadowGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      shadowCtx.fillStyle = shadowGradient;
+      shadowCtx.fillRect(0, 0, 512, 256);
+      var shadowSprite = new THREE.Sprite(new THREE.SpriteMaterial({
+        map: new THREE.CanvasTexture(shadowCanvas),
+        transparent: true,
+        depthWrite: false
+      }));
+      shadowSprite.position.set(0, 0.25, -0.65);
+      shadowSprite.scale.set(11.5, 5.2, 1);
+      scene.add(shadowSprite);
 
       // REALISTIC BURNING WORDMARK ENGINE (MENJELANGPADAM)
       // Lighting
-      var ambient = new THREE.AmbientLight(0x4a5260, 0.45);
+      var ambient = new THREE.AmbientLight(0x222934, 0.22);
       scene.add(ambient);
 
-      var moonLight = new THREE.DirectionalLight(0x7e94ac, 0.55);
+      var moonLight = new THREE.DirectionalLight(0x425367, 0.28);
       moonLight.position.set(-3, 8, 5);
       scene.add(moonLight);
 
@@ -1767,10 +1810,17 @@
           smk.sprite.material.opacity = Math.max(0.03, 0.38 * (1.0 - lifeFrac) * (0.2 + 0.8 * heatFactor));
         }
 
-        // Lights dim and shift color with fire extinction
-        flamePointLight.intensity = (0.2 + 3.0 * flameFactor) * chaoticFlicker;
+        // Lights and surroundings dim as fire extinguishes
+        flamePointLight.intensity = (0.15 + 3.2 * flameFactor) * chaoticFlicker;
         flamePointLight.color.setRGB(1.0, 0.35 * flameFactor, 0.0);
-        flameSubLight.intensity = (0.1 + 1.7 * heatFactor) * chaoticFlicker;
+        flameSubLight.intensity = (0.08 + 1.8 * heatFactor) * chaoticFlicker;
+
+        // Surroundings plunge deeper into cold darkness as fire dies out
+        var pR = 0.08 + 0.07 * flameFactor;
+        var pG = 0.10 + 0.05 * flameFactor;
+        var pB = 0.14 + 0.03 * flameFactor;
+        panoMaterial.color.setRGB(pR, pG, pB);
+        ambient.intensity = 0.12 + 0.14 * flameFactor;
 
         renderer.render(scene, camera);
       }
