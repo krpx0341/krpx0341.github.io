@@ -1395,61 +1395,82 @@
       var panoMaterial = new THREE.MeshBasicMaterial({ map: panoTexture });
       scene.add(new THREE.Mesh(panoGeometry, panoMaterial));
 
-      // DYNAMIC FIRE, RISING SMOKE, AND COOLING EMBER SIMULATION (MENJELANGPADAM)
+      // REALISTIC BURNING WORDMARK ENGINE (MENJELANGPADAM)
       // Lighting
-      var ambient = new THREE.AmbientLight(0x505864, 0.45);
+      var ambient = new THREE.AmbientLight(0x4a5260, 0.45);
       scene.add(ambient);
 
-      var moonLight = new THREE.DirectionalLight(0x8fa6bd, 0.65);
-      moonLight.position.set(-4, 7, 6);
+      var moonLight = new THREE.DirectionalLight(0x7e94ac, 0.55);
+      moonLight.position.set(-3, 8, 5);
       scene.add(moonLight);
 
-      // Warm ember light centered on wordmark
-      var emberLight = new THREE.PointLight(0xff4500, 2.5, 12, 1.8);
-      emberLight.position.set(0, 0, 1.8);
-      scene.add(emberLight);
+      // Primary fire radiant light right in front of the letters
+      var flamePointLight = new THREE.PointLight(0xff5500, 3.2, 14, 1.6);
+      flamePointLight.position.set(0, 0.1, 1.8);
+      scene.add(flamePointLight);
 
-      var emberLightSide = new THREE.PointLight(0xff8820, 1.2, 8, 2.0);
-      emberLightSide.position.set(-2.4, -0.2, 1.5);
-      scene.add(emberLightSide);
+      var flameSubLight = new THREE.PointLight(0xff8811, 1.8, 10, 1.8);
+      flameSubLight.position.set(-2.2, -0.2, 1.6);
+      scene.add(flameSubLight);
 
-      // Procedural textures for zero-dependency high-res particle rendering
-      function makeParticleTexture(type) {
+      // Procedural noise textures for fire quads and dynamic billowing smoke
+      function makeFlameTexture() {
         var canvas = document.createElement('canvas');
-        canvas.width = 64;
-        canvas.height = 64;
+        canvas.width = 128;
+        canvas.height = 256;
         var ctx = canvas.getContext('2d');
-        var grad;
-        if (type === 'flame') {
-          grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-          grad.addColorStop(0, 'rgba(255, 255, 240, 1)');
-          grad.addColorStop(0.2, 'rgba(255, 170, 30, 0.95)');
-          grad.addColorStop(0.5, 'rgba(240, 60, 10, 0.6)');
-          grad.addColorStop(0.8, 'rgba(120, 15, 0, 0.2)');
-          grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-        } else {
-          // Smoke
-          grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-          grad.addColorStop(0, 'rgba(130, 125, 120, 0.42)');
-          grad.addColorStop(0.35, 'rgba(85, 80, 78, 0.22)');
-          grad.addColorStop(0.7, 'rgba(40, 38, 36, 0.08)');
-          grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-        }
+        // Flame tongue shape: bright concentrated base, hot narrow tip
+        var grad = ctx.createRadialGradient(64, 190, 8, 64, 160, 90);
+        grad.addColorStop(0, 'rgba(255, 255, 240, 1)');
+        grad.addColorStop(0.2, 'rgba(255, 185, 30, 0.95)');
+        grad.addColorStop(0.48, 'rgba(240, 75, 10, 0.7)');
+        grad.addColorStop(0.78, 'rgba(140, 15, 0, 0.25)');
+        grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
         ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, 64, 64);
-        var tex = new THREE.CanvasTexture(canvas);
-        return tex;
+        ctx.beginPath();
+        ctx.ellipse(64, 160, 48, 88, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Inner white-hot core
+        var coreGrad = ctx.createRadialGradient(64, 180, 2, 64, 175, 36);
+        coreGrad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+        coreGrad.addColorStop(0.5, 'rgba(255, 220, 100, 0.8)');
+        coreGrad.addColorStop(1, 'rgba(255, 120, 20, 0)');
+        ctx.fillStyle = coreGrad;
+        ctx.beginPath();
+        ctx.ellipse(64, 175, 22, 50, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        return new THREE.CanvasTexture(canvas);
       }
 
-      var flameTex = makeParticleTexture('flame');
-      var smokeTex = makeParticleTexture('smoke');
+      function makeSmokeTexture() {
+        var canvas = document.createElement('canvas');
+        canvas.width = 128;
+        canvas.height = 128;
+        var ctx = canvas.getContext('2d');
+        var grad = ctx.createRadialGradient(64, 64, 6, 64, 64, 60);
+        grad.addColorStop(0, 'rgba(125, 118, 110, 0.45)');
+        grad.addColorStop(0.35, 'rgba(80, 75, 70, 0.26)');
+        grad.addColorStop(0.7, 'rgba(45, 42, 38, 0.08)');
+        grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 128, 128);
+        return new THREE.CanvasTexture(canvas);
+      }
+
+      var flameMap = makeFlameTexture();
+      var smokeMap = makeSmokeTexture();
 
       var wordmark = null;
-      var emberMeshes = [];
-      var emberBaseIntensity = [];
+      var letterMeshes = [];
+      var modelFlameCores = [];
+      var modelFadingFlames = [];
+      var modelSparks = [];
+      var modelSmokeWisps = [];
       var clock = new THREE.Clock();
 
-      // Load 3D wordmark
+      // Load the new menjelangpadam-no-underline.glb
       var gltfLoader = new THREE.GLTFLoader();
       gltfLoader.load('models/wordmark.glb', function (gltf) {
         wordmark = gltf.scene;
@@ -1463,15 +1484,15 @@
         var targetWidth = window.innerWidth < 720 ? 5.8 : 7.9;
         var scale = targetWidth / Math.max(size.x, 0.001);
         wordmark.scale.setScalar(scale);
-        wordmark.position.y = 0.25;
+        wordmark.position.y = 0.22;
 
-        // Traverse: remove underline/base, isolate embers, adjust materials
         wordmark.traverse(function (node) {
           if (!node.isMesh) return;
-          var name = (node.name || '').toLowerCase();
+          var name = (node.name || '');
+          var lower = name.toLowerCase();
 
-          // HIDE THE LINE/BAR BELOW THE 3D TEXT
-          if (name.indexOf('base') !== -1 || name.indexOf('ash_base') !== -1 || name.indexOf('ground') !== -1) {
+          // Hide any leftover base/underline mesh
+          if (lower.indexOf('base') !== -1 || lower.indexOf('ash_base') !== -1 || lower.indexOf('underline') !== -1) {
             node.visible = false;
             return;
           }
@@ -1479,20 +1500,45 @@
           if (node.material) {
             node.material = node.material.clone();
 
-            if (name.indexOf('ember') !== -1 || name.indexOf('crack') !== -1) {
-              node.material.emissive = new THREE.Color(0xff4500);
+            if (lower.indexOf('letter') !== -1) {
+              // Charred letter bodies: dark rough carbon with glowing creeping embers on burning edges
+              node.material.color = new THREE.Color(0x181716);
+              node.material.roughness = 0.85;
+              node.material.metalness = 0.22;
+              node.material.emissive = new THREE.Color(0xff2200);
+              node.material.emissiveIntensity = 0.45;
+              letterMeshes.push(node);
+            } else if (lower.indexOf('hot flame core') !== -1) {
+              // Hot white-orange flame core
+              node.material.transparent = true;
+              node.material.blending = THREE.AdditiveBlending;
+              node.material.depthWrite = false;
+              node.material.emissive = new THREE.Color(0xffaa22);
+              node.material.emissiveIntensity = 3.5;
+              modelFlameCores.push({ node: node, baseScale: node.scale.clone(), phase: Math.random() * 6.28 });
+            } else if (lower.indexOf('fading flame') !== -1) {
+              // Licking flame body
+              node.material.transparent = true;
+              node.material.blending = THREE.AdditiveBlending;
+              node.material.depthWrite = false;
+              node.material.emissive = new THREE.Color(0xff4400);
+              node.material.emissiveIntensity = 2.4;
+              modelFadingFlames.push({ node: node, baseScale: node.scale.clone(), phase: Math.random() * 6.28, speed: 6.0 + Math.random() * 5.0 });
+            } else if (lower.indexOf('spark') !== -1) {
+              // Real 3D sparks
+              node.material.transparent = true;
+              node.material.blending = THREE.AdditiveBlending;
+              node.material.depthWrite = false;
+              node.material.emissive = new THREE.Color(0xff7711);
               node.material.emissiveIntensity = 2.0;
-              emberMeshes.push(node);
-              emberBaseIntensity.push(2.0);
-            } else if (name.indexOf('smoke') !== -1) {
-              // Hide GLB static smoke geometry; dynamic Three.js particle smoke is far superior
-              node.visible = false;
-            } else {
-              // Charred burnt letters: dark rough carbon
-              node.material.roughness = 0.88;
-              node.material.metalness = 0.2;
+              modelSparks.push({ node: node, basePos: node.position.clone(), speed: 0.8 + Math.random() * 1.5, drift: (Math.random() - 0.5) * 0.4 });
+            } else if (lower.indexOf('smoke') !== -1) {
+              // Model 3D smoke wisps: billboard-like soft rising smoke
+              node.material.transparent = true;
+              node.material.opacity = 0.22;
+              node.material.depthWrite = false;
+              modelSmokeWisps.push({ node: node, basePos: node.position.clone(), phase: Math.random() * 6.28 });
             }
-            node.material.needsUpdate = true;
           }
         });
 
@@ -1501,85 +1547,91 @@
         console.error('Failed to load wordmark.glb', err);
       });
 
-      // 1. FLAME PARTICLES (Licking fire that flickers and eventually dies)
-      var FLAME_COUNT = window.innerWidth < 720 ? 65 : 120;
-      var flameGeo = new THREE.BufferGeometry();
-      var flamePos = new Float32Array(FLAME_COUNT * 3);
-      var flameMeta = []; // { baseX, baseY, baseZ, life, maxLife, speed, drift }
+      // 1. DYNAMIC BURNING TONGUES (Licking fire meshes attached along the letters)
+      // Uses billboard sprite-like flame quads so the letters actively burn with licking tongues
+      var FLAME_SHEET_COUNT = window.innerWidth < 720 ? 40 : 70;
+      var flameGroup = new THREE.Group();
+      var flameSheets = [];
 
-      for (var f = 0; f < FLAME_COUNT; f++) {
-        var fx = (Math.random() - 0.5) * 7.4;
-        var fy = -0.42 + Math.random() * 0.15;
-        var fz = (Math.random() - 0.5) * 0.45;
-        flamePos[f * 3] = fx;
-        flamePos[f * 3 + 1] = fy;
-        flamePos[f * 3 + 2] = fz;
-        flameMeta.push({
-          baseX: fx,
-          baseY: fy,
-          baseZ: fz,
-          life: Math.random(),
-          maxLife: 0.6 + Math.random() * 0.7,
-          speed: 0.008 + Math.random() * 0.014,
-          curl: (Math.random() - 0.5) * 0.02
-        });
-      }
-
-      flameGeo.setAttribute('position', new THREE.BufferAttribute(flamePos, 3));
-      var flameMat = new THREE.PointsMaterial({
-        map: flameTex,
-        size: window.innerWidth < 720 ? 0.28 : 0.42,
+      var flameSheetMat = new THREE.SpriteMaterial({
+        map: flameMap,
         transparent: true,
-        opacity: 0.85,
         blending: THREE.AdditiveBlending,
-        depthWrite: false
+        depthWrite: false,
+        opacity: 0.95
       });
-      var flameParticles = new THREE.Points(flameGeo, flameMat);
-      flameParticles.position.y = 0.25;
-      scene.add(flameParticles);
 
-      // 2. DYNAMIC CURLING SMOKE PARTICLES
-      var SMOKE_COUNT = window.innerWidth < 720 ? 45 : 85;
-      var smokeGeo = new THREE.BufferGeometry();
-      var smokePos = new Float32Array(SMOKE_COUNT * 3);
-      var smokeMeta = [];
-
-      for (var s = 0; s < SMOKE_COUNT; s++) {
-        var sx = (Math.random() - 0.5) * 7.2;
-        var sy = -0.3 + Math.random() * 2.2;
-        var sz = (Math.random() - 0.5) * 0.7;
-        smokePos[s * 3] = sx;
-        smokePos[s * 3 + 1] = sy;
-        smokePos[s * 3 + 2] = sz;
-        smokeMeta.push({
+      for (var fs = 0; fs < FLAME_SHEET_COUNT; fs++) {
+        var sprite = new THREE.Sprite(flameSheetMat.clone());
+        var sx = (Math.random() - 0.5) * 7.4;
+        var sy = -0.35 + Math.random() * 0.45;
+        var sz = (Math.random() - 0.5) * 0.35;
+        sprite.position.set(sx, sy, sz);
+        var baseScaleX = 0.35 + Math.random() * 0.3;
+        var baseScaleY = 0.65 + Math.random() * 0.55;
+        sprite.scale.set(baseScaleX, baseScaleY, 1);
+        flameGroup.add(sprite);
+        flameSheets.push({
+          sprite: sprite,
           baseX: sx,
+          baseY: sy,
           baseZ: sz,
-          speed: 0.004 + Math.random() * 0.007,
-          swaySpeed: 0.8 + Math.random() * 1.5,
-          swayAmp: 0.15 + Math.random() * 0.35,
-          rot: Math.random() * Math.PI
+          baseScaleX: baseScaleX,
+          baseScaleY: baseScaleY,
+          phase: Math.random() * 6.28,
+          speed: 7.0 + Math.random() * 8.0,
+          drift: (Math.random() - 0.5) * 0.15
         });
       }
+      flameGroup.position.y = 0.22;
+      scene.add(flameGroup);
 
-      smokeGeo.setAttribute('position', new THREE.BufferAttribute(smokePos, 3));
-      var smokeMat = new THREE.PointsMaterial({
-        map: smokeTex,
-        size: window.innerWidth < 720 ? 0.75 : 1.15,
+      // 2. DYNAMIC BILLOWING SMOKE
+      var SMOKE_SPRITE_COUNT = window.innerWidth < 720 ? 35 : 60;
+      var smokeGroup = new THREE.Group();
+      var smokeSprites = [];
+
+      var smokeSheetMat = new THREE.SpriteMaterial({
+        map: smokeMap,
         transparent: true,
-        opacity: 0.35,
         blending: THREE.NormalBlending,
-        depthWrite: false
+        depthWrite: false,
+        opacity: 0.35
       });
-      var smokeParticles = new THREE.Points(smokeGeo, smokeMat);
-      smokeParticles.position.y = 0.25;
-      scene.add(smokeParticles);
+
+      for (var ss = 0; ss < SMOKE_SPRITE_COUNT; ss++) {
+        var smSprite = new THREE.Sprite(smokeSheetMat.clone());
+        var smX = (Math.random() - 0.5) * 7.2;
+        var smY = -0.2 + Math.random() * 2.6;
+        var smZ = (Math.random() - 0.5) * 0.5;
+        smSprite.position.set(smX, smY, smZ);
+        var smScale = 0.8 + Math.random() * 0.9;
+        smSprite.scale.set(smScale, smScale, 1);
+        smokeGroup.add(smSprite);
+        smokeSprites.push({
+          sprite: smSprite,
+          baseX: smX,
+          y: smY,
+          baseZ: smZ,
+          scale: smScale,
+          speed: 0.005 + Math.random() * 0.008,
+          swaySpeed: 1.0 + Math.random() * 1.5,
+          swayAmp: 0.2 + Math.random() * 0.35,
+          phase: Math.random() * 6.28
+        });
+      }
+      smokeGroup.position.y = 0.22;
+      scene.add(smokeGroup);
 
       // EXTINCTION TIMELINE STATE
-      // Cycle: 0 to 22 seconds (starts with embers and dying flame, gradually extinguishes to cold ash)
-      // Gentle respark on user tap or click
-      var userStirEnergy = 0;
+      // Cycle: 24s period
+      // Phase 1 (0-7s): Text is actively on fire with licking tongues and burning heat
+      // Phase 2 (7-15s): Flames visibly shrink, sputter, and extinguish one by one
+      // Phase 3 (15-22s): Fire completely gone. Embers in charred letters cool to dark ash and near-zero glow
+      // Phase 4: Lingering darkness with cold smoke
+      var userReignite = 0;
       renderer.domElement.addEventListener('pointerdown', function () {
-        userStirEnergy = 0.85; // poking the dying coals
+        userReignite = 0.9;
       });
 
       // Animation loop
@@ -1590,84 +1642,135 @@
         var elapsed = clock.getElapsedTime();
         var dt = 0.016;
 
-        // Wordmark calm idle levitation
+        // Calm floating breathing motion
         if (wordmark) {
-          wordmark.position.y = 0.25 + Math.sin(elapsed * 0.5) * 0.02;
-          wordmark.rotation.y = Math.sin(elapsed * 0.2) * 0.015;
-          flameParticles.position.y = wordmark.position.y;
-          smokeParticles.position.y = wordmark.position.y;
+          wordmark.position.y = 0.22 + Math.sin(elapsed * 0.5) * 0.02;
+          flameGroup.position.y = wordmark.position.y;
+          smokeGroup.position.y = wordmark.position.y;
         }
 
-        // Extinguishing cycle: 24s period
-        // Phase 1 (0-6s): residual flame and bright ember
-        // Phase 2 (6-14s): fire dies out completely, embers cooling
-        // Phase 3 (14-22s): near extinction, faint lingering coal warmth
+        // Extinction timeline calculations
         var cycleTime = elapsed % 24;
-        userStirEnergy = Math.max(0, userStirEnergy - dt * 0.18);
+        userReignite = Math.max(0, userReignite - dt * 0.2);
 
-        var fireFactor = Math.max(0, 1.0 - (cycleTime / 9.0)) + userStirEnergy * 0.7;
-        fireFactor = Math.min(1.0, fireFactor);
-
-        var emberCooling;
+        // Flame factor: drops from 1.0 down to exactly 0 by 11 seconds
+        var flameFactor = 0;
         if (cycleTime < 6) {
-          emberCooling = 1.0;
-        } else if (cycleTime < 16) {
-          emberCooling = 1.0 - ((cycleTime - 6) / 10.0) * 0.85; // cools down to 0.15
+          flameFactor = 1.0;
+        } else if (cycleTime < 11) {
+          flameFactor = Math.pow(1.0 - ((cycleTime - 6) / 5.0), 1.8);
+        }
+        flameFactor = Math.min(1.0, flameFactor + userReignite);
+
+        // Ember / glowing letter heat factor: drops from 1.0 to 0.04 by 18 seconds
+        var heatFactor = 0.04;
+        if (cycleTime < 7) {
+          heatFactor = 1.0;
+        } else if (cycleTime < 17) {
+          heatFactor = 0.04 + (1.0 - 0.04) * Math.pow(1.0 - ((cycleTime - 7) / 10.0), 1.5);
         } else {
-          // Lingering dying breath
-          emberCooling = 0.08 + Math.sin(elapsed * 1.2) * 0.04;
+          // Faint dying breath pulse
+          heatFactor = 0.03 + Math.sin(elapsed * 1.0) * 0.02;
         }
-        emberCooling = Math.min(1.0, emberCooling + userStirEnergy);
+        heatFactor = Math.min(1.0, heatFactor + userReignite);
 
-        // Update Flame Particles (licking upward, flickering, dying)
-        var fPos = flameGeo.attributes.position.array;
-        for (var i = 0; i < FLAME_COUNT; i++) {
-          var m = flameMeta[i];
-          m.life += m.speed;
-          if (m.life > m.maxLife) {
-            m.life = 0;
-            fPos[i * 3 + 1] = m.baseY;
-            fPos[i * 3] = m.baseX + (Math.random() - 0.5) * 0.1;
-          } else {
-            fPos[i * 3 + 1] += m.speed * 1.6;
-            fPos[i * 3] += Math.sin(elapsed * 6.0 + i) * 0.003 + m.curl;
+        var chaoticFlicker = 0.88 + Math.sin(elapsed * 9.5) * 0.08 + (Math.random() - 0.5) * 0.12;
+
+        // Animate 3D letters burning on the mesh itself
+        // Creeping red ember line across letter edges that fades as it burns out
+        for (var li = 0; li < letterMeshes.length; li++) {
+          var letter = letterMeshes[li];
+          var letterG = Math.max(0.01, 0.15 * heatFactor);
+          letter.material.emissive.setRGB(0.9 * heatFactor, letterG, 0.0);
+          letter.material.emissiveIntensity = (0.1 + 0.65 * heatFactor) * chaoticFlicker;
+        }
+
+        // Animate 3D GLB Model Flame Cores & Fading Flames (licking & stretching)
+        for (var ci = 0; ci < modelFlameCores.length; ci++) {
+          var core = modelFlameCores[ci];
+          var cScale = (0.7 + Math.sin(elapsed * 14.0 + core.phase) * 0.3) * flameFactor;
+          core.node.scale.set(
+            core.baseScale.x * (0.8 + Math.random() * 0.4) * flameFactor,
+            core.baseScale.y * cScale,
+            core.baseScale.z * flameFactor
+          );
+          core.node.material.opacity = flameFactor;
+          core.node.material.emissiveIntensity = 3.5 * flameFactor * chaoticFlicker;
+        }
+
+        for (var fi = 0; fi < modelFadingFlames.length; fi++) {
+          var ff = modelFadingFlames[fi];
+          var fLick = Math.sin(elapsed * ff.speed + ff.phase);
+          ff.node.scale.set(
+            ff.baseScale.x * (0.7 + fLick * 0.3) * flameFactor,
+            ff.baseScale.y * (0.6 + fLick * 0.55) * flameFactor,
+            ff.baseScale.z * flameFactor
+          );
+          ff.node.material.opacity = flameFactor * 0.9;
+          ff.node.material.emissiveIntensity = 2.4 * flameFactor * chaoticFlicker;
+        }
+
+        // Animate 3D GLB Sparks
+        for (var spi = 0; spi < modelSparks.length; spi++) {
+          var sp = modelSparks[spi];
+          sp.node.position.y += 0.012 * sp.speed * (0.3 + 0.7 * flameFactor);
+          sp.node.position.x += Math.sin(elapsed * 4.0 + spi) * 0.003;
+          if (sp.node.position.y > sp.basePos.y + 1.8) {
+            sp.node.position.y = sp.basePos.y;
+            sp.node.position.x = sp.basePos.x + (Math.random() - 0.5) * 0.2;
           }
+          sp.node.material.opacity = flameFactor * 0.85;
         }
-        flameGeo.attributes.position.needsUpdate = true;
-        flameMat.opacity = 0.85 * fireFactor;
-        flameMat.size = (window.innerWidth < 720 ? 0.28 : 0.42) * (0.4 + 0.6 * fireFactor);
 
-        // Update Dynamic Smoke (curling, rising, billowing)
-        var sPos = smokeGeo.attributes.position.array;
-        for (var j = 0; j < SMOKE_COUNT; j++) {
-          var sm = smokeMeta[j];
-          sPos[j * 3 + 1] += sm.speed;
-          sPos[j * 3] = sm.baseX + Math.sin(elapsed * sm.swaySpeed + j) * sm.swayAmp;
-          if (sPos[j * 3 + 1] > 2.8) {
-            sPos[j * 3 + 1] = -0.3;
-            sm.baseX = (Math.random() - 0.5) * 7.2;
+        // Animate 3D GLB Smoke wisps
+        for (var wi = 0; wi < modelSmokeWisps.length; wi++) {
+          var wisp = modelSmokeWisps[wi];
+          wisp.node.position.y += 0.006;
+          wisp.node.position.x += Math.sin(elapsed * 1.5 + wisp.phase) * 0.004;
+          if (wisp.node.position.y > wisp.basePos.y + 2.2) {
+            wisp.node.position.y = wisp.basePos.y;
           }
+          wisp.node.material.opacity = Math.max(0.04, 0.25 * (0.3 + 0.7 * heatFactor));
         }
-        smokeGeo.attributes.position.needsUpdate = true;
-        // Smoke thins as fire extinguishes, leaving faint ghost curls
-        smokeMat.opacity = Math.max(0.06, 0.38 * (0.35 + 0.65 * emberCooling));
 
-        // Update Ember Materials (animasi bara yang padam)
-        // Shift color from blazing orange to deep dying crimson
-        var emberFlicker = 0.85 + Math.sin(elapsed * 4.5) * 0.15 + (Math.random() - 0.5) * 0.08;
-        var r = 1.0;
-        var g = Math.max(0.02, 0.28 * emberCooling);
-        var b = 0.0;
+        // Animate Sprite Flame Tongues (moving tongues of fire licking off the letters)
+        for (var fsi = 0; fsi < flameSheets.length; fsi++) {
+          var sheet = flameSheets[fsi];
+          var lick = Math.sin(elapsed * sheet.speed + sheet.phase);
+          var stretch = 0.7 + lick * 0.45;
+          sheet.sprite.scale.set(
+            sheet.baseScaleX * (0.8 + Math.abs(lick) * 0.3) * flameFactor,
+            sheet.baseScaleY * stretch * flameFactor,
+            1
+          );
+          sheet.sprite.position.y = sheet.baseY + (stretch - 1.0) * 0.15;
+          sheet.sprite.position.x = sheet.baseX + Math.sin(elapsed * 5.0 + fsi) * 0.03 + sheet.drift;
+          sheet.sprite.material.opacity = flameFactor * (0.6 + Math.random() * 0.35);
+        }
 
-        emberMeshes.forEach(function (mesh, idx) {
-          var base = emberBaseIntensity[idx] || 2.0;
-          mesh.material.emissive.setRGB(r, g, b);
-          mesh.material.emissiveIntensity = base * emberCooling * emberFlicker;
-        });
+        // Animate Billowing Smoke Sprites (rising, dispersing, swaying)
+        for (var ssi = 0; ssi < smokeSprites.length; ssi++) {
+          var smk = smokeSprites[ssi];
+          smk.y += smk.speed;
+          smk.sprite.position.y = smk.y;
+          smk.sprite.position.x = smk.baseX + Math.sin(elapsed * smk.swaySpeed + smk.phase) * smk.swayAmp;
+          var lifeFrac = (smk.y - (-0.2)) / 3.0;
+          smk.sprite.scale.set(
+            smk.scale * (1.0 + lifeFrac * 1.2),
+            smk.scale * (1.0 + lifeFrac * 1.2),
+            1
+          );
+          if (smk.y > 2.8) {
+            smk.y = -0.2;
+            smk.baseX = (Math.random() - 0.5) * 7.2;
+          }
+          smk.sprite.material.opacity = Math.max(0.03, 0.38 * (1.0 - lifeFrac) * (0.2 + 0.8 * heatFactor));
+        }
 
-        // Lights fade with embers
-        emberLight.intensity = 2.5 * emberCooling * emberFlicker;
-        emberLightSide.intensity = 1.2 * emberCooling * emberFlicker;
+        // Lights dim and shift color with fire extinction
+        flamePointLight.intensity = (0.2 + 3.0 * flameFactor) * chaoticFlicker;
+        flamePointLight.color.setRGB(1.0, 0.35 * flameFactor, 0.0);
+        flameSubLight.intensity = (0.1 + 1.7 * heatFactor) * chaoticFlicker;
 
         renderer.render(scene, camera);
       }
