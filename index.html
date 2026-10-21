@@ -88,6 +88,56 @@
     #splash-screen:active {
       cursor: grabbing;
     }
+
+    #splash-epigraph {
+      position: absolute;
+      left: 50%;
+      top: calc(50% + clamp(54px, 9vw, 108px));
+      transform: translateX(-50%);
+      z-index: 10001;
+      width: min(88vw, 620px);
+      color: rgba(235, 221, 199, 0.78);
+      font-size: clamp(10px, 1.2vw, 13px);
+      line-height: 1.65;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: lowercase;
+      text-shadow: 0 2px 8px #000, 0 0 14px rgba(255, 96, 20, 0.18);
+      pointer-events: none;
+    }
+    #splash-epigraph::before,
+    #splash-epigraph::after {
+      content: "";
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      margin: 0 10px 3px;
+      background: linear-gradient(90deg, transparent, rgba(210, 99, 55, 0.55));
+    }
+    #splash-epigraph::after {
+      background: linear-gradient(90deg, rgba(210, 99, 55, 0.55), transparent);
+    }
+    #ember-status {
+      position: absolute;
+      left: 50%;
+      top: calc(50% + clamp(90px, 12vw, 144px));
+      transform: translateX(-50%);
+      z-index: 10001;
+      color: rgba(196, 113, 69, 0.56);
+      font-size: 8px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      pointer-events: none;
+      animation: emberStatus 3.8s ease-in-out infinite;
+    }
+    @keyframes emberStatus {
+      0%, 100% { opacity: 0.24; }
+      55% { opacity: 0.72; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #ember-status { animation: none; }
+    }
+
     #splash-instruction {
       position: absolute;
       bottom: 36px;
@@ -848,6 +898,8 @@
 
   <!-- SPLASH SCREEN CANVAS & INSTRUCTION -->
   <div id="splash-screen">
+    <div id="splash-epigraph">some things keep burning<br>long after the flame is gone.</div>
+    <div id="ember-status">ember process // nearly gone</div>
     <div id="splash-instruction">[DRAG TO LOOK AROUND // ENTER TO CONTINUE]</div>
   </div>
   <canvas id="snowCanvas"></canvas>
@@ -1339,13 +1391,15 @@
 
       // Three.js Splash Scene Setup
       var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.set(0, 1.2, 3.8);
+      var camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 0.1, 7.2);
 
       var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.08;
+      renderer.outputEncoding = THREE.sRGBEncoding;
       splashScreen.appendChild(renderer.domElement);
 
       var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -1367,25 +1421,134 @@
       var panoMaterial = new THREE.MeshBasicMaterial({ map: panoTexture });
       scene.add(new THREE.Mesh(panoGeometry, panoMaterial));
 
-      // Lights
-      var ambient = new THREE.AmbientLight(0xd8dee9, 0.7);
+      // Low, dying-fire light rig: warm embers against a cool night panorama.
+      var ambient = new THREE.AmbientLight(0x6f7887, 0.38);
       scene.add(ambient);
 
-      var dirLight = new THREE.DirectionalLight(0x88c0d0, 1.2);
-      dirLight.position.set(5, 10, 7);
-      scene.add(dirLight);
+      var moonLight = new THREE.DirectionalLight(0x8fa6bd, 0.72);
+      moonLight.position.set(-4, 6, 6);
+      scene.add(moonLight);
 
-      var pointLight = new THREE.PointLight(0x5e81ac, 2, 20);
-      pointLight.position.set(0, 2, 2);
-      scene.add(pointLight);
+      var emberLight = new THREE.PointLight(0xff4d13, 2.8, 10, 2);
+      emberLight.position.set(0.7, -0.05, 2.6);
+      scene.add(emberLight);
 
-      // Transparent canvas over CSS wallpaper
-      // Panorama only. No foreground mascot competing with place.
+      var emberLightLow = new THREE.PointLight(0xff9a3c, 1.4, 7, 2);
+      emberLightLow.position.set(-2.6, -0.55, 2.1);
+      scene.add(emberLightLow);
+
+      var wordmark = null;
+      var emberMeshes = [];
+      var smokeMeshes = [];
+      var emberBaseIntensity = [];
+      var elapsedClock = new THREE.Clock();
+
+      // Load the locally hosted charred MENJELANGPADAM wordmark.
+      var gltfLoader = new THREE.GLTFLoader();
+      gltfLoader.load('models/wordmark.glb', function (gltf) {
+        wordmark = gltf.scene;
+
+        // Fit model to viewport while preserving the long wordmark silhouette.
+        var bounds = new THREE.Box3().setFromObject(wordmark);
+        var size = bounds.getSize(new THREE.Vector3());
+        var center = bounds.getCenter(new THREE.Vector3());
+        wordmark.position.sub(center);
+        var targetWidth = window.innerWidth < 720 ? 5.8 : 7.9;
+        var scale = targetWidth / Math.max(size.x, 0.001);
+        wordmark.scale.setScalar(scale);
+        wordmark.position.y = 0.28;
+        wordmark.rotation.x = -0.035;
+
+        wordmark.traverse(function (node) {
+          if (!node.isMesh) return;
+          var name = (node.name || '').toLowerCase();
+          if (node.material) {
+            node.material = node.material.clone();
+            if (name.indexOf('ember') !== -1 || name.indexOf('crack') !== -1) {
+              node.material.emissive = new THREE.Color(0xff3c0b);
+              node.material.emissiveIntensity = name.indexOf('crack') !== -1 ? 0.72 : 1.28;
+              emberMeshes.push(node);
+              emberBaseIntensity.push(node.material.emissiveIntensity);
+            } else if (name.indexOf('smoke') !== -1) {
+              node.material.transparent = true;
+              node.material.opacity = Math.min(node.material.opacity || 0.18, 0.18);
+              node.material.depthWrite = false;
+              smokeMeshes.push(node);
+            } else {
+              // Charred metal: nearly black, rough, with restrained cool reflections.
+              node.material.roughness = Math.max(node.material.roughness || 0, 0.78);
+              node.material.metalness = Math.min(node.material.metalness || 0.3, 0.42);
+            }
+            node.material.needsUpdate = true;
+          }
+        });
+
+        scene.add(wordmark);
+      }, undefined, function (error) {
+        console.error('wordmark.glb failed to load', error);
+      });
+
+      // Sparse drifting embers. Kept intentionally weak: fire is almost gone.
+      var particleCount = window.innerWidth < 720 ? 20 : 34;
+      var particlePositions = new Float32Array(particleCount * 3);
+      var particleSpeeds = [];
+      for (var p = 0; p < particleCount; p++) {
+        particlePositions[p * 3] = (Math.random() - 0.5) * 6.6;
+        particlePositions[p * 3 + 1] = -0.65 + Math.random() * 1.25;
+        particlePositions[p * 3 + 2] = 0.8 + Math.random() * 1.4;
+        particleSpeeds[p] = 0.08 + Math.random() * 0.19;
+      }
+      var particleGeometry = new THREE.BufferGeometry();
+      particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+      var particleMaterial = new THREE.PointsMaterial({
+        color: 0xff7132,
+        size: window.innerWidth < 720 ? 0.028 : 0.038,
+        transparent: true,
+        opacity: 0.56,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      var emberParticles = new THREE.Points(particleGeometry, particleMaterial);
+      scene.add(emberParticles);
 
       // Animation loop
       function animate() {
         requestAnimationFrame(animate);
         controls.update();
+
+        var t = elapsedClock.getElapsedTime();
+
+        if (wordmark) {
+          // Barely floating, never spinning like a showroom object.
+          wordmark.position.y = 0.28 + Math.sin(t * 0.48) * 0.028;
+          wordmark.rotation.y = Math.sin(t * 0.21) * 0.018;
+        }
+
+        // Irregular fading pulse, more ember than open flame.
+        var pulse = 0.38 + Math.max(0, Math.sin(t * 2.1)) * 0.22 + Math.sin(t * 7.7) * 0.045;
+        emberMeshes.forEach(function (mesh, index) {
+          mesh.material.emissiveIntensity = emberBaseIntensity[index] * pulse;
+        });
+        emberLight.intensity = 1.2 + pulse * 1.65;
+        emberLightLow.intensity = 0.55 + pulse * 0.85;
+
+        smokeMeshes.forEach(function (mesh, index) {
+          mesh.position.y += 0.00035 + (index % 3) * 0.00008;
+          mesh.rotation.z += 0.00015 * (index % 2 ? 1 : -1);
+          if (mesh.position.y > 1.4) mesh.position.y -= 1.1;
+        });
+
+        var pos = emberParticles.geometry.attributes.position.array;
+        for (var i = 0; i < particleCount; i++) {
+          pos[i * 3 + 1] += particleSpeeds[i] * 0.012;
+          pos[i * 3] += Math.sin(t * 0.7 + i) * 0.00045;
+          if (pos[i * 3 + 1] > 1.2) {
+            pos[i * 3] = (Math.random() - 0.5) * 6.6;
+            pos[i * 3 + 1] = -0.65;
+          }
+        }
+        emberParticles.geometry.attributes.position.needsUpdate = true;
+        particleMaterial.opacity = 0.32 + pulse * 0.22;
 
         renderer.render(scene, camera);
       }
